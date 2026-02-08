@@ -70,7 +70,7 @@ const ProjectCreate = () => {
           const formData = new FormData()
           formData.append('document', files[i])
 
-          const uploadRes = await fetch('${API_URL}/api/upload/project-artifact', {
+          const uploadRes = await fetch(`${API_URL}/api/upload/project-artifact`, {
             method: 'POST',
             body: formData
           })
@@ -109,7 +109,7 @@ const ProjectCreate = () => {
         ...(attachments.length > 0 && { attachments: attachments })
       }
 
-      const res = await fetch('${API_URL}/api/projects', {
+      const res = await fetch(`${API_URL}/api/projects`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -277,7 +277,7 @@ const ProjectCreate = () => {
                 type="file"
                 id="fileUpload1"
                 hidden
-                accept=".pdf,.doc,.docx,.txt"
+                accept=".pdf"
                 onChange={(e) => handleFileChange(e, 0)}
               />
               <Typography variant="h6" fontWeight={600} gutterBottom>
@@ -287,7 +287,7 @@ const ProjectCreate = () => {
                 {files[0] ? `${files[0].name} (${(files[0].size / 1024).toFixed(2)} KB)` : 'or click to browse'}
               </Typography>
               <Typography variant="caption" color="text.secondary">
-                Accepted formats: PDF, DOC, DOCX, TXT
+                Accepted format: PDF
               </Typography>
             </Box>
             {files[0] && (
@@ -345,7 +345,7 @@ const ProjectCreate = () => {
                 type="file"
                 id="fileUpload2"
                 hidden
-                accept=".pdf,.doc,.docx,.txt"
+                accept=".pdf"
                 onChange={(e) => handleFileChange(e, 1)}
               />
               <Typography variant="h6" fontWeight={600} gutterBottom>
@@ -355,7 +355,7 @@ const ProjectCreate = () => {
                 {files[1] ? `${files[1].name} (${(files[1].size / 1024).toFixed(2)} KB)` : 'or click to browse'}
               </Typography>
               <Typography variant="caption" color="text.secondary">
-                Accepted formats: PDF, DOC, DOCX, TXT
+                Accepted format: PDF
               </Typography>
             </Box>
             {files[1] && (

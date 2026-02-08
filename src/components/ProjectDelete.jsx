@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
-import API_URL from '../config'
     Button,
     Dialog,
     DialogActions,
@@ -10,9 +10,7 @@ import API_URL from '../config'
     IconButton,
     Tooltip
 } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useNavigate } from 'react-router-dom';
-import API_URL from '../config'
+import API_URL from '../config';
 
 const ProjectDelete = ({ projectId, projectTitle, onDeleteSuccess }) => {
     const [open, setOpen] = useState(false);
@@ -30,7 +28,7 @@ const ProjectDelete = ({ projectId, projectTitle, onDeleteSuccess }) => {
     const handleDelete = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`http://localhost:3000/api/projects/${projectId}`, {
+            const res = await fetch(`${API_URL}/api/projects/${projectId}`, {
                 method: 'DELETE',
             });
 
@@ -65,7 +63,6 @@ const ProjectDelete = ({ projectId, projectTitle, onDeleteSuccess }) => {
                 <Button
                     variant="outlined"
                     color="error"
-                    startIcon={<DeleteIcon />}
                     onClick={handleClickOpen}
                     sx={{
                         borderColor: 'error.main',

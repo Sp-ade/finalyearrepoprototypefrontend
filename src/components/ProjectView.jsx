@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
-import API_URL from '../config'
+
     Box,
     Typography,
     Button,
@@ -20,8 +20,7 @@ import API_URL from '../config'
 } from '@mui/material'
 import ProjectDelete from './ProjectDelete'
 import API_URL from '../config'
-// import ProjectsData from '../Projects.json'
-import API_URL from '../config'
+//  API_URL from '../config';
 
 const ProjectView = () => {
     const { id } = useParams()
@@ -32,8 +31,8 @@ const ProjectView = () => {
     useEffect(() => {
         const studentId = localStorage.getItem('userId');
         const url = studentId
-            ? `http://localhost:3000/api/projects/${id}?studentId=${studentId}`
-            : `http://localhost:3000/api/projects/${id}`;
+            ? `${API_URL}/api/projects/${id}?studentId=${studentId}`
+            : `${API_URL}/api/projects/${id}`;
 
         fetch(url)
             .then(res => {
@@ -87,7 +86,7 @@ const ProjectView = () => {
         setSubmittingRequest(true);
 
         try {
-            const response = await fetch('${API_URL}/api/requests', {
+            const response = await fetch(`${API_URL}/api/requests`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

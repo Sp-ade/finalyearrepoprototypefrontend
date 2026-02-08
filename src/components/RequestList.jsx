@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
-import API_URL from '../config'
+
   Box,
   Card,
   CardContent,
@@ -18,7 +18,7 @@ import API_URL from '../config'
   Divider,
   Grid
 } from '@mui/material'
-
+import API_URL from '../config'
 const RequestList = () => {
   const [requests, setRequests] = useState([])
   const [loading, setLoading] = useState(true)
@@ -43,7 +43,7 @@ const RequestList = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/requests/supervisor/${supervisorId}`)
+      const response = await fetch(`${API_URL}/api/requests/supervisor/${supervisorId}`)
       if (!response.ok) {
         throw new Error('Failed to fetch requests')
       }
@@ -78,7 +78,7 @@ const RequestList = () => {
 
     setActionLoading(true)
     try {
-      const res = await fetch(`http://localhost:3000/api/requests/${selected.request_id}`, {
+      const res = await fetch(`${API_URL}/api/requests/${selected.request_id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

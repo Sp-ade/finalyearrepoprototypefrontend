@@ -18,7 +18,7 @@ const StaffBrowse = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch('${API_URL}/api/projects')
+    fetch(`${API_URL}/api/projects`)
       .then(res => res.json())
       .then(data => {
         if (data.projects) {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-import API_URL from '../config'
+
     Box,
     Container,
     Paper,
@@ -22,8 +22,7 @@ import API_URL from '../config'
     Switch,
     Stack
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import API_URL from '../config'
+import API_URL from '../config';
 
 const UserManagement = () => {
     const navigate = useNavigate();
@@ -44,7 +43,7 @@ const UserManagement = () => {
             if (roleFilter) params.append('role', roleFilter);
             if (search) params.append('search', search);
 
-            const response = await fetch(`http://localhost:3000/api/admin/users?${params}`, {
+            const response = await fetch(`${API_URL}/api/admin/users?${params}`, {
                 headers: {
                     'x-user-role': 'admin'
                 }
@@ -62,7 +61,7 @@ const UserManagement = () => {
 
     const fetchStats = async () => {
         try {
-            const response = await fetch('${API_URL}/api/admin/users/stats', {
+            const response = await fetch(`${API_URL}/api/admin/users/stats`, {
                 headers: {
                     'x-user-role': 'admin'
                 }

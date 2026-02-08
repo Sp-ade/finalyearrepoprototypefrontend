@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Container, Box, Paper, Typography, TextField, Button } from '@mui/material'
-import API_URL from '../config'
 
 const AdminLogin = ({ onSwitch }) => {
     const [userName, setUserName] = useState('')
@@ -20,7 +19,7 @@ const AdminLogin = ({ onSwitch }) => {
         }
         setLoading(true)
         try {
-            const res = await fetch(`${API_URL}/api/login`, {
+            const res = await fetch('http://localhost:3000/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: userName, password })

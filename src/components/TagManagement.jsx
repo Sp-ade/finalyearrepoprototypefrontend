@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-import API_URL from '../config'
+
     Box,
     Container,
     Paper,
@@ -62,7 +62,7 @@ const TagManagement = () => {
 
     const handleSaveEdit = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/admin/tags/${editDialog.tag.tag_id}`, {
+            const response = await fetch(`${API_URL}/api/admin/tags/${editDialog.tag.tag_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

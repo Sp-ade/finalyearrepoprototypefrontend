@@ -69,7 +69,7 @@ const StaffDashboard = () => {
       if (!userId) return
 
       try {
-        const response = await fetch('${API_URL}/api/projects')
+        const response = await fetch(`${API_URL}/api/projects`)
         if (response.ok) {
           const data = await response.json()
           // Filter projects by supervisor_id
