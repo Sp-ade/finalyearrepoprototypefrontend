@@ -404,7 +404,7 @@ const ProjectCreate = () => {
           severity="success"
           sx={{
             width: '100%',
-            backgroundColor: '#00ff0dff',
+            backgroundColor: '#58e45fff',
             color: 'white',
             '& .MuiAlert-icon': {
               color: 'white'
