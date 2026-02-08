@@ -1,0 +1,178 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "name": "Project Alpha",
+      "title": "Research and Development",
+      "description": "A comprehensive research project focusing on emerging technologies.",
+      "supervisor": "Dr. John Doe",
+      "StudentCount": 5,
+      "Studentnames": [
+        "Alice",
+        "Bob",
+        "Charlie",
+        "David",
+        "Eve"
+      ],
+      "Tags": [
+        "Research",
+        "Development",
+        "Technology"
+      ],
+      "category": "Research",
+      "year": "2024/2025",
+      "grade": "A",
+      "finalRemark": "Excellent work demonstrating innovative approaches to emerging technology challenges."
+    },
+    {
+      "id": 2,
+      "name": "Project Beta",
+      "title": "Design and Innovation",
+      "description": "An innovative design project aimed at creating user-centric solutions.",
+      "supervisor": "Prof. Jane Smith",
+      "StudentCount": 3,
+      "Studentnames": [
+        "Frank",
+        "Grace",
+        "Heidi"
+      ],
+      "Tags": [
+        "Design",
+        "Innovation",
+        "User Experience"
+      ],
+      "category": "Design",
+      "year": "2024/2025",
+      "grade": "B+",
+      "finalRemark": "Strong design principles with room for improvement in implementation details."
+    },
+    {
+      "id": 3,
+      "name": "ramdev",
+      "title": "tile",
+      "description": "fdgegteg",
+      "supervisor": "dr. john",
+      "StudentCount": 1,
+      "Studentnames": [
+        "fred "
+      ],
+      "attachment": {
+        "fileName": "1769179157195-401965426-Testing_OOP.pptx",
+        "originalName": "Testing OOP.pptx",
+        "url": "/uploads/1769179157195-401965426-Testing_OOP.pptx"
+      }
+    },
+    {
+      "id": 4,
+      "name": "DEVsad",
+      "title": "design and implementation of MyProject",
+      "description": "fdghjiugfddtiygtffufyughjhkhjhhehrwjkffjbwhjgvhjwgfwf",
+      "supervisor": "Dr. Billy whatso",
+      "StudentCount": 1,
+      "Studentnames": [
+        "frank mike"
+      ],
+      "attachment": {
+        "url": "https://res.cloudinary.com/dl38emsoc/image/upload/v1769342984/documents/hc9nspcmsw6fza8vkmxm.pdf",
+        "publicId": "documents/hc9nspcmsw6fza8vkmxm",
+        "originalName": "IJSET_V13_issue2_252.pdf",
+        "size": 452885
+      }
+    },
+    {
+      "id": 5,
+      "name": "Thedev",
+      "title": "Design of myotherproject",
+      "description": "asfwfewfwfe fwefewfewf ewdvgg rgrf",
+      "supervisor": "exotic, react, node",
+      "StudentCount": 2,
+      "Studentnames": [
+        "Frank chest",
+        "Billy Basim"
+      ],
+      "attachment": {
+        "url": "https://res.cloudinary.com/dl38emsoc/image/upload/v1769344176/project_artifacts/iewev4jflm7vb3tdbsdn.pdf",
+        "publicId": "project_artifacts/iewev4jflm7vb3tdbsdn",
+        "originalName": "SEN_401_LAB_2_GROUP_2.pdf",
+        "size": 184446
+      }
+    },
+    {
+      "id": 6,
+      "name": "Thedev",
+      "title": "Design of myotherproject",
+      "description": "sgtetbegergegegegege description test",
+      "supervisor": "Dr. rently bart",
+      "StudentCount": 1,
+      "Studentnames": [
+        "mark chest"
+      ],
+      "attachment": {
+        "url": "https://res.cloudinary.com/dl38emsoc/image/upload/v1769345985/project_artifacts/ocyrfrr9kevqrvlgiupg.pdf",
+        "publicId": "project_artifacts/ocyrfrr9kevqrvlgiupg",
+        "originalName": "SEN_401_LAB_2_GROUP_2.pdf",
+        "size": 184446
+      },
+      "Tags": [
+        "Past",
+        "wheat",
+        "cake"
+      ],
+      "category": "Development",
+      "year": "2026",
+      "grade": "A",
+      "finalRemark": "student showcased\n"
+    },
+    {
+      "id": 7,
+      "name": "Thedrty",
+      "title": "Design ct",
+      "description": "grtext text text text text ex",
+      "supervisor": "Dr. rently bart",
+      "StudentCount": 2,
+      "Studentnames": [
+        "mike wazo",
+        "fraud nile"
+      ],
+      "attachment": {
+        "url": "https://res.cloudinary.com/dl38emsoc/image/upload/v1769348968/project_artifacts/vyyxqaaoxlamj64lvnza.pdf",
+        "publicId": "project_artifacts/vyyxqaaoxlamj64lvnza",
+        "originalName": "SEN_401_LAB_2_GROUP_2.pdf",
+        "size": 184446
+      },
+      "Tags": [
+        "React",
+        "energy"
+      ],
+      "category": "Research",
+      "year": "2026",
+      "grade": "A",
+      "finalRemark": "this student shows"
+    },
+    {
+      "id": 8,
+      "name": "Thedrty",
+      "title": "Design ct",
+      "description": "hhkj",
+      "supervisor": "Dr. rently bart",
+      "StudentCount": 1,
+      "Studentnames": [
+        "law"
+      ],
+      "attachment": {
+        "url": "https://res.cloudinary.com/dl38emsoc/raw/upload/v1769349251/project_artifacts/SEN_401_LAB_2_GROUP_2-1769349246015.pdf",
+        "publicId": "project_artifacts/SEN_401_LAB_2_GROUP_2-1769349246015.pdf",
+        "originalName": "SEN_401_LAB_2_GROUP_2.pdf",
+        "size": 184446
+      },
+      "Tags": [
+        "React",
+        "energy"
+      ],
+      "category": "Design",
+      "year": "2026",
+      "grade": "A",
+      "finalRemark": "strvjk,m"
+    }
+  ]
+}
