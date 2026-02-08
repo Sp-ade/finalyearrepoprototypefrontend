@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Box, Typography, Grid, Card, CardContent, Button, Stack } from '@mui/material'
 import AccountInformation from './AccountInformation'
 import ProjectCard from './ProjectCard'
-import heroimage from '../assets/Nile-University-Matriculation-Ceremony.jpg'
 import { useNavigate } from 'react-router'
 import API_URL from '../config'
 
@@ -24,7 +23,7 @@ const StaffDashboard = () => {
       if (!email) return
 
       try {
-        const response = await fetch(`http://localhost:3000/api/me?email=${encodeURIComponent(email)}`)
+        const response = await fetch(`${API_URL}/api/me?email=${encodeURIComponent(email)}`)
         if (response.ok) {
           const userData = await response.json()
           setFirstName(userData.firstName || '')
@@ -45,7 +44,7 @@ const StaffDashboard = () => {
       if (!userId) return
 
       try {
-        const response = await fetch(`http://localhost:3000/api/requests/supervisor/${userId}`)
+        const response = await fetch(`${API_URL}/api/requests/supervisor/${userId}`)
         if (response.ok) {
           const data = await response.json()
           // Count pending requests (case-insensitive)
@@ -100,9 +99,7 @@ const StaffDashboard = () => {
         sx={{
           width: '100vw',
           height: '35vh',
-          backgroundImage: `url(${heroimage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          bgcolor: 'primary.main',
           color: 'common.white',
           display: 'flex',
           alignItems: 'center',
