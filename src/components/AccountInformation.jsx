@@ -23,7 +23,7 @@ const AccountInformation = () => {
             }
 
             try {
-                const response = await fetch(`http://localhost:3000/api/me?email=${encodeURIComponent(email)}`)
+                const response = await fetch(`${API_URL}/api/me?email=${encodeURIComponent(email)}`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch user data')
                 }
