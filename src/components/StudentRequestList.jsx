@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import {
+import {
+
     Box,
     Card,
     CardContent,
@@ -15,6 +16,7 @@ import {
     CircularProgress,
     Alert
 } from '@mui/material'
+import API_URL from '../config'
 
 const StudentRequestList = () => {
     const [requests, setRequests] = useState([])
@@ -33,7 +35,7 @@ const StudentRequestList = () => {
             }
 
             try {
-                const response = await fetch(`http://localhost:3000/api/requests/student/${studentId}`)
+                const response = await fetch(`${API_URL}/api/requests/student/${studentId}`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch requests')
                 }
@@ -70,7 +72,7 @@ const StudentRequestList = () => {
         if (!window.confirm('Are you sure you want to cancel this request?')) return
 
         try {
-            const response = await fetch(`http://localhost:3000/api/requests/${requestId}`, {
+            const response = await fetch(`${API_URL}/api/requests/${requestId}`, {
                 method: 'DELETE'
             })
 

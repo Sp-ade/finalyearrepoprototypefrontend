@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import {
+import {
+
     Box,
     Typography,
     Button,
@@ -13,7 +14,7 @@ import {
 } from '@mui/material'
 import ProjectDelete from './ProjectDelete'
 import API_URL from '../config'
-//  API_URL from '../config';
+
 
 const StaffProjectView = () => {
     const { id } = useParams()
@@ -22,7 +23,7 @@ const StaffProjectView = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/projects/${id}`)
+        fetch(`${API_URL}/api/projects/${id}`)
             .then(res => {
                 if (!res.ok) throw new Error('Project not found')
                 return res.json()
