@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Typography, Grid, Card, CardContent, Button, Stack } from '@mui/material'
 import AccountInformation from './AccountInformation'
-import heroimage from '../assets/Nile-University-Matriculation-Ceremony.jpg'
 import API_URL from '../config'
 
 
@@ -20,7 +19,7 @@ const StudentDashboard = () => {
       if (!email) return
 
       try {
-        const response = await fetch(`http://localhost:3000/api/me?email=${encodeURIComponent(email)}`)
+        const response = await fetch(`${API_URL}/api/me?email=${encodeURIComponent(email)}`)
         if (response.ok) {
           const userData = await response.json()
           setFirstName(userData.firstName || '')
@@ -41,7 +40,7 @@ const StudentDashboard = () => {
       if (!userId) return
 
       try {
-        const response = await fetch(`http://localhost:3000/api/requests/student/${userId}`)
+        const response = await fetch(`${API_URL}/api/requests/student/${userId}`)
         if (response.ok) {
           const data = await response.json()
           // Filter requests with 'pending' status (case-insensitive)
@@ -69,9 +68,7 @@ const StudentDashboard = () => {
         sx={{
           width: '100vw',
           height: '35vh',
-          backgroundImage: `url(${heroimage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          bgcolor: 'primary.main',
           color: 'common.white',
           display: 'flex',
           alignItems: 'center',
