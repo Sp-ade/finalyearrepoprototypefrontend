@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Paper, TextField, Button, Stack, Typography } from '@mui/material'
+import { Box, Paper, TextField, Button, Stack, Typography, Snackbar, Alert } from '@mui/material'
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import API_URL from '../config'
@@ -37,6 +37,7 @@ const ProjectCreate = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [uploadProgress, setUploadProgress] = useState(0)
+  const [showSuccess, setShowSuccess] = useState(false)
 
   const handleFileChange = (e, index) => {
     const selectedFile = e.target.files?.[0] ?? null
@@ -121,7 +122,12 @@ const ProjectCreate = () => {
 
       const data = await res.json()
       setLoading(false)
-      navigate('/staffbrowse')
+      setShowSuccess(true)
+
+      // Navigate after showing toast
+      setTimeout(() => {
+        navigate('/staffbrowse')
+      }, 1500)
     } catch (err) {
       setLoading(false)
       setError(err.message)
@@ -387,6 +393,17 @@ const ProjectCreate = () => {
         )}
 
       </Paper>
+
+      <Snackbar
+        open={showSuccess}
+        autoHideDuration={1500}
+        onClose={() => setShowSuccess(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert severity="success" sx={{ width: '100%' }}>
+          Project created successfully!
+        </Alert>
+      </Snackbar>
     </Box>
   )
 }
