@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Box, Paper, TextField, Button, Stack, Typography } from '@mui/material'
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import API_URL from '../config'
 
 const ProjectCreate = () => {
   const [rows, setRows] = useState([{ name: '', id: '' }])
@@ -69,7 +70,7 @@ const ProjectCreate = () => {
           const formData = new FormData()
           formData.append('document', files[i])
 
-          const uploadRes = await fetch('http://localhost:3000/api/upload/project-artifact', {
+          const uploadRes = await fetch('${API_URL}/api/upload/project-artifact', {
             method: 'POST',
             body: formData
           })
@@ -108,7 +109,7 @@ const ProjectCreate = () => {
         ...(attachments.length > 0 && { attachments: attachments })
       }
 
-      const res = await fetch('http://localhost:3000/api/projects', {
+      const res = await fetch('${API_URL}/api/projects', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

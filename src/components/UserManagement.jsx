@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+import API_URL from '../config'
     Box,
     Container,
     Paper,
@@ -22,6 +23,7 @@ import {
     Stack
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../config'
 
 const UserManagement = () => {
     const navigate = useNavigate();
@@ -60,7 +62,7 @@ const UserManagement = () => {
 
     const fetchStats = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/admin/users/stats', {
+            const response = await fetch('${API_URL}/api/admin/users/stats', {
                 headers: {
                     'x-user-role': 'admin'
                 }

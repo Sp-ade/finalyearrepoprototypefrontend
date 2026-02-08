@@ -4,6 +4,7 @@ import AccountInformation from './AccountInformation'
 import ProjectCard from './ProjectCard'
 import heroimage from '../assets/Nile-University-Matriculation-Ceremony.jpg'
 import { useNavigate } from 'react-router'
+import API_URL from '../config'
 
 
 
@@ -68,7 +69,7 @@ const StaffDashboard = () => {
       if (!userId) return
 
       try {
-        const response = await fetch('http://localhost:3000/api/projects')
+        const response = await fetch('${API_URL}/api/projects')
         if (response.ok) {
           const data = await response.json()
           // Filter projects by supervisor_id

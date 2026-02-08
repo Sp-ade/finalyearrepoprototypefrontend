@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Box, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Typography, Button, Fab, Chip, Stack } from '@mui/material'
 import Card from './ProjectCard'
 import heroImage from '../assets/scott-unsplash.jpg'
+import API_URL from '../config'
 
 
 
@@ -17,7 +18,7 @@ const StaffBrowse = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/projects')
+    fetch('${API_URL}/api/projects')
       .then(res => res.json())
       .then(data => {
         if (data.projects) {

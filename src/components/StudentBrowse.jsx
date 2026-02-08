@@ -2,7 +2,9 @@ import React, { useMemo, useState, useEffect } from 'react'
 import { Box, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Typography, Button, Chip, Stack } from '@mui/material'
 import heroImage from '../assets/scott-unsplash.jpg'
 import Card from './ProjectCard'
+import API_URL from '../config'
 // import ProjectsData from '../Projects.json'
+import API_URL from '../config'
 
 // const sampleProjects = ProjectsData && ProjectsData.projects ? ProjectsData.projects : []
 
@@ -15,7 +17,7 @@ const StudentBrowse = () => {
   const [projects, setProjects] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/projects')
+    fetch('${API_URL}/api/projects')
       .then(res => res.json())
       .then(data => {
         if (data.projects) {

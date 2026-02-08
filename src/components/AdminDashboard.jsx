@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+import API_URL from '../config'
     Box,
     Container,
     Grid,
@@ -11,6 +12,7 @@ import {
     Divider
 } from '@mui/material';
 import {
+import API_URL from '../config'
     People as PeopleIcon,
     Folder as FolderIcon,
     Assignment as AssignmentIcon,
@@ -27,7 +29,7 @@ const AdminDashboard = () => {
 
     const fetchAnalytics = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/admin/analytics/dashboard', {
+            const response = await fetch('${API_URL}/api/admin/analytics/dashboard', {
                 headers: {
                     'x-user-role': 'admin' // In production, this would come from JWT
                 }

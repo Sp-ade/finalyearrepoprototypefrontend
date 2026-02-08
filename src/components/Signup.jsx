@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 import { Container, Box, Paper, Typography, TextField, Button, MenuItem, Alert } from '@mui/material'
+import API_URL from '../config'
 
 const Signup = () => {
     const [searchParams] = useSearchParams()
@@ -69,7 +70,7 @@ const Signup = () => {
 
         setLoading(true)
         try {
-            const res = await fetch('http://localhost:3000/api/signup', {
+            const res = await fetch('${API_URL}/api/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

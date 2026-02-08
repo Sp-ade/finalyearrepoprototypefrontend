@@ -6,6 +6,7 @@ import BadgeIcon from '@mui/icons-material/Badge'
 import SchoolIcon from '@mui/icons-material/School'
 import WorkIcon from '@mui/icons-material/Work'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import API_URL from '../config'
 
 const AccountInformation = () => {
     const [userData, setUserData] = useState(null)

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+import API_URL from '../config'
     Button,
     Dialog,
     DialogActions,
@@ -11,6 +12,7 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../config'
 
 const ProjectDelete = ({ projectId, projectTitle, onDeleteSuccess }) => {
     const [open, setOpen] = useState(false);

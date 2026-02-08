@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Box, Typography, Grid, Card, CardContent, Button, Stack } from '@mui/material'
 import AccountInformation from './AccountInformation'
 import heroimage from '../assets/Nile-University-Matriculation-Ceremony.jpg'
+import API_URL from '../config'
 
 
 const StudentDashboard = () => {

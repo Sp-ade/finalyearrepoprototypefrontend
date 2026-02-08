@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
+import API_URL from '../config'
     Box,
     Typography,
     Button,
@@ -18,7 +19,9 @@ import {
     TextField
 } from '@mui/material'
 import ProjectDelete from './ProjectDelete'
+import API_URL from '../config'
 // import ProjectsData from '../Projects.json'
+import API_URL from '../config'
 
 const ProjectView = () => {
     const { id } = useParams()
@@ -84,7 +87,7 @@ const ProjectView = () => {
         setSubmittingRequest(true);
 
         try {
-            const response = await fetch('http://localhost:3000/api/requests', {
+            const response = await fetch('${API_URL}/api/requests', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

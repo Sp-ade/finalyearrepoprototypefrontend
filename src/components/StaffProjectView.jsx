@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
+import API_URL from '../config'
     Box,
     Typography,
     Button,
@@ -12,7 +13,9 @@ import {
     CircularProgress
 } from '@mui/material'
 import ProjectDelete from './ProjectDelete'
+import API_URL from '../config'
 // import ProjectsData from '../Projects.json'
+import API_URL from '../config'
 
 const StaffProjectView = () => {
     const { id } = useParams()

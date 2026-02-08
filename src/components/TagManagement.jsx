@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+import API_URL from '../config'
     Box,
     Container,
     Paper,
@@ -22,6 +23,7 @@ import {
 } from '@mui/material';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import API_URL from '../config'
 
 const TagManagement = () => {
     const navigate = useNavigate();
@@ -37,7 +39,7 @@ const TagManagement = () => {
 
     const fetchTags = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/admin/tags', {
+            const response = await fetch('${API_URL}/api/admin/tags', {
                 headers: {
                     'x-user-role': 'admin'
                 }
