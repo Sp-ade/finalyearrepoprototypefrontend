@@ -396,11 +396,21 @@ const ProjectCreate = () => {
 
       <Snackbar
         open={showSuccess}
-        autoHideDuration={1500}
+        autoHideDuration={2500}
         onClose={() => setShowSuccess(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert severity="success" sx={{ width: '100%' }}>
+        <Alert
+          severity="success"
+          sx={{
+            width: '100%',
+            backgroundColor: '#00ff0dff',
+            color: 'white',
+            '& .MuiAlert-icon': {
+              color: 'white'
+            }
+          }}
+        >
           Project created successfully!
         </Alert>
       </Snackbar>
