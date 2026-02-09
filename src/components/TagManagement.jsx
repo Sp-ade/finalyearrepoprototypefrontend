@@ -39,7 +39,7 @@ const TagManagement = () => {
 
     const fetchTags = async () => {
         try {
-            const response = await fetch('${API_URL}/api/admin/tags', {
+            const response = await fetch(`${API_URL}/api/admin/tags`, {
                 headers: {
                     'x-user-role': 'admin'
                 }
@@ -87,7 +87,7 @@ const TagManagement = () => {
 
     const handleConfirmDelete = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/admin/tags/${deleteDialog.tag.tag_id}`, {
+            const response = await fetch(`${API_URL}/api/admin/tags/${deleteDialog.tag.tag_id}`, {
                 method: 'DELETE',
                 headers: {
                     'x-user-role': 'admin'

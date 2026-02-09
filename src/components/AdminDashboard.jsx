@@ -22,6 +22,7 @@ import API_URL from '../config'
 const AdminDashboard = () => {
     const [analytics, setAnalytics] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showAllActivity, setShowAllActivity] = useState(false);
 
     useEffect(() => {
         fetchAnalytics();
@@ -122,7 +123,7 @@ const AdminDashboard = () => {
                 <Grid container spacing={3}>
                     {/* User Breakdown */}
                     <Grid item xs={12} md={4}>
-                        <Paper sx={{ p: 3, height: '100%' }}>
+                        <Paper sx={{ p: 3, height: '80%' }}>
                             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
                                 User Breakdown
                             </Typography>
@@ -153,7 +154,7 @@ const AdminDashboard = () => {
 
                     {/* Project Breakdown */}
                     <Grid item xs={12} md={4}>
-                        <Paper sx={{ p: 3, height: '100%' }}>
+                        <Paper sx={{ p: 3, height: '80%' }}>
                             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
                                 Project Status
                             </Typography>
@@ -164,13 +165,7 @@ const AdminDashboard = () => {
                                         {analytics?.projects?.active_projects || 0}
                                     </Typography>
                                 </Box>
-                                <Divider />
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                    <Typography variant="body2" color="text.secondary">Completed</Typography>
-                                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                                        {analytics?.projects?.completed_projects || 0}
-                                    </Typography>
-                                </Box>
+
                                 <Divider />
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Typography variant="body2" color="text.secondary">Departments</Typography>
@@ -184,7 +179,7 @@ const AdminDashboard = () => {
 
                     {/* Request Breakdown */}
                     <Grid item xs={12} md={4}>
-                        <Paper sx={{ p: 3, height: '100%' }}>
+                        <Paper sx={{ p: 3, height: '80%' }}>
                             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
                                 Request Status
                             </Typography>
@@ -212,8 +207,10 @@ const AdminDashboard = () => {
                             </Box>
                         </Paper>
                     </Grid>
+                </Grid>
 
-                    {/* Recent Activity */}
+                {/* Recent Activity - Separate Section */}
+                <Grid container spacing={3} sx={{ mt: 2 }}>
                     <Grid item xs={12}>
                         <Paper sx={{ p: 3 }}>
                             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
@@ -221,16 +218,37 @@ const AdminDashboard = () => {
                             </Typography>
                             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                                 {analytics?.recent_activity?.length > 0 ? (
-                                    analytics.recent_activity.map((activity, index) => (
-                                        <Box key={index} sx={{ py: 1, borderBottom: index < analytics.recent_activity.length - 1 ? '1px solid #eee' : 'none' }}>
-                                            <Typography variant="body2">
-                                                <strong>{activity.action.replace('_', ' ').toUpperCase()}</strong>: {activity.details}
-                                            </Typography>
-                                            <Typography variant="caption" color="text.secondary">
-                                                {new Date(activity.created_at).toLocaleString()}
-                                            </Typography>
-                                        </Box>
-                                    ))
+                                    <>
+                                        {(showAllActivity
+                                            ? analytics.recent_activity
+                                            : analytics.recent_activity.slice(0, 7)
+                                        ).map((activity, index) => (
+                                            <Box key={index} sx={{ py: 1, borderBottom: '1px solid #eee' }}>
+                                                <Typography variant="body2">
+                                                    <strong>{activity.action.replace('_', ' ').toUpperCase()}</strong>: {activity.details}
+                                                </Typography>
+                                                <Typography variant="caption" color="text.secondary">
+                                                    {new Date(activity.created_at).toLocaleString()}
+                                                </Typography>
+                                            </Box>
+                                        ))}
+                                        {analytics.recent_activity.length > 7 && (
+                                            <Box sx={{ mt: 2, textAlign: 'center' }}>
+                                                <Typography
+                                                    variant="body2"
+                                                    sx={{
+                                                        color: 'primary.main',
+                                                        cursor: 'pointer',
+                                                        fontWeight: 600,
+                                                        '&:hover': { textDecoration: 'underline' }
+                                                    }}
+                                                    onClick={() => setShowAllActivity(!showAllActivity)}
+                                                >
+                                                    {showAllActivity ? 'Show Less' : `Read More (${analytics.recent_activity.length - 7} more)`}
+                                                </Typography>
+                                            </Box>
+                                        )}
+                                    </>
                                 ) : (
                                     <Typography variant="body2" color="text.secondary">No recent activity</Typography>
                                 )}

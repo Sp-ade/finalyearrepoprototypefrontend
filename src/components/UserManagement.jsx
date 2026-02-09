@@ -23,6 +23,7 @@ import {
     Stack
 } from '@mui/material';
 import API_URL from '../config';
+import { useNavigate } from 'react-router-dom';
 
 const UserManagement = () => {
     const navigate = useNavigate();
@@ -77,7 +78,7 @@ const UserManagement = () => {
 
     const handleStatusToggle = async (userId, currentStatus) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/admin/users/${userId}/status`, {
+            const response = await fetch(`${API_URL}/api/admin/users/${userId}/status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

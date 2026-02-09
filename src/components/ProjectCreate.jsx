@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Box, Paper, TextField, Button, Stack, Typography, Snackbar, Alert } from '@mui/material'
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { ArrowBack } from '@mui/icons-material'
 import API_URL from '../config'
 
 const ProjectCreate = () => {
@@ -137,6 +138,13 @@ const ProjectCreate = () => {
   return (
     <Box sx={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
       <Paper sx={{ p: 3, width: 800, maxWidth: '95%' }} elevation={3}>
+        <Button
+          startIcon={<ArrowBack />}
+          onClick={() => navigate(-1)}
+          sx={{ mb: 2 }}
+        >
+          Return
+        </Button>
         <Typography variant="h6" sx={{ mb: 2 }}>
           Project Creation
         </Typography>
