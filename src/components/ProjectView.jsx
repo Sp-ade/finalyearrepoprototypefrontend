@@ -138,9 +138,9 @@ const ProjectView = () => {
                     </Typography>
                     <Button
                         variant="contained"
-                        onClick={() => navigate('/studentbrowse')}
+                        onClick={() => navigate(-1)}
                     >
-                        ← Back to Browse
+                        ← Go Back
                     </Button>
                 </Paper>
             </Container>
@@ -152,10 +152,10 @@ const ProjectView = () => {
             <Container maxWidth="lg">
                 {/* Back Button */}
                 <Button
-                    onClick={() => navigate('/studentbrowse')}
+                    onClick={() => navigate(-1)}
                     sx={{ mb: 3 }}
                 >
-                    ← Back to Browse
+                    ← Go Back
                 </Button>
 
                 {/* Main Content */}
