@@ -95,10 +95,10 @@ const StaffDashboard = () => {
   const navigate = useNavigate()
 
   return (
-    <Box sx={{ p: 0 }}>
+    <Box sx={{ p: 0, margin: 0, width: '100%' }}>
       <Box
         sx={{
-          width: '100vw',
+          width: '100%',
           height: '35vh',
           backgroundImage: `url(${heroimage})`,
           backgroundSize: 'cover',
@@ -107,11 +107,7 @@ const StaffDashboard = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          position: 'relative',
-          left: '50%',
-          right: '50%',
-          marginLeft: '-50vw',
-          marginRight: '-50vw',
+
         }}
       >
         <Typography variant="h4" component="h1">
@@ -119,7 +115,7 @@ const StaffDashboard = () => {
         </Typography>
       </Box>
 
-      <Box sx={{ mt: 0 }}>
+      <Box sx={{ margin: 0, padding: 0 }}>
         <AccountInformation />
       </Box>
 

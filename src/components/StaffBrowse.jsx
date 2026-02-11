@@ -85,11 +85,12 @@ const StaffBrowse = () => {
       <Box sx={{
         height: 400, width: '100vw', position: 'relative', left: '50%',
         right: '50%', marginLeft: '-50vw', marginRight: '-50vw', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'
-      }}><Box sx={{ alignSelf: 'flex-start', justifySelf: 'flex-start', height: '40%' }}>
+      }}><Box sx={{ position: 'relative', right: '25%', bottom: '20%' }}>
           <Typography variant="h3" sx={{ color: 'white', fontWeight: 'bold' }}>Supervisor browse page</Typography>
+          <Typography variant="h3" sx={{ color: 'white', fontSize: '1.2rem' }}>Welcome to the project browse page</Typography>
         </Box>
         {/* search bar at the start of the page */}
-        <Box sx={{ mb: 3, width: '80%' }}>
+        <Box sx={{ mb: 3, width: '60%', position: 'relative', top: '20%' }}>
           <TextField
             fullWidth
             label="Search projects"
