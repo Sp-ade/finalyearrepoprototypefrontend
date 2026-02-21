@@ -1,7 +1,8 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Typography, Button, Fab, Chip, Stack } from '@mui/material'
-import Card from './ProjectCard'
+import PageHeader from './common/PageHeader'
+import Card from './project/ProjectCard'
 import heroImage from '../assets/scott-unsplash.jpg'
 import API_URL from '../config'
 
@@ -117,7 +118,7 @@ const StaffBrowse = () => {
 
         {/* title and filters */}
         <Box sx={{ mb: 3 }}>
-          <Typography component="h1" variant="h4" sx={{ mb: 2 }}>All projects</Typography>
+          <PageHeader title="All Projects" showBack={false} />
 
           {/* Filter dropdowns */}
           <Stack direction="row" spacing={2} sx={{ mb: 2 }}>

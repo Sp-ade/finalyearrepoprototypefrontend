@@ -81,7 +81,7 @@ const StaffLogin = ({ onSwitch }) => {
                             <br />
                             <Typography sx={{ fontSize: "0.8rem", }}>NOTE: use your school mail and password here</Typography>
                             <br />
-                            <Typography sx={{ fontSize: "0.8rem", opacity: "60%" }}>Are you a student? <span onClick={onSwitch} style={{ textDecoration: 'underline', color: 'inherit', cursor: 'pointer' }}>Click here</span></Typography>
+                            <Typography sx={{ fontSize: "0.8rem", opacity: "60%" }}>Are you an admin? <span onClick={onSwitch} style={{ textDecoration: 'underline', color: 'inherit', cursor: 'pointer' }}>Click here</span></Typography>
                         </Box>
                     </Box>
                 </Paper>

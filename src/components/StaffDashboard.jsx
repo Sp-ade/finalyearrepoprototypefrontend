@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Typography, Grid, Card, CardContent, Button, Stack } from '@mui/material'
 import AccountInformation from './AccountInformation'
-import ProjectCard from './ProjectCard'
+import ProjectCard from './project/ProjectCard'
 import heroimage from '../assets/Nile-Matriculation.jpg'
 import { useNavigate } from 'react-router'
 import API_URL from '../config'

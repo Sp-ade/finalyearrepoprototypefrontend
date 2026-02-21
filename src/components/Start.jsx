@@ -24,7 +24,7 @@ const Start = () => {
           navigate('/admindashboard')
         }
 
-      }, 1800);
+      }, 1200);
     }
 
     fetchUserData()

@@ -1,7 +1,8 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import { Box, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Typography, Button, Chip, Stack } from '@mui/material'
+import PageHeader from './common/PageHeader'
 import heroImage from '../assets/scott-unsplash.jpg'
-import Card from './ProjectCard'
+import Card from './project/ProjectCard'
 import API_URL from '../config'
 
 
@@ -109,7 +110,7 @@ const StudentBrowse = () => {
 
         {/* title and filters */}
         <Box sx={{ mb: 3 }}>
-          <Typography component="h1" variant="h4" sx={{ mb: 2 }}>All projects</Typography>
+          <PageHeader title="All Projects" showBack={false} />
 
           {/* Filter dropdowns */}
           <Stack direction="row" spacing={2} sx={{ mb: 2 }}>

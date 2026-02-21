@@ -18,7 +18,9 @@ import AdminDashboard from './components/AdminDashboard'
 import UserManagement from './components/UserManagement'
 import TagManagement from './components/TagManagement'
 import AdminLogin from './components/AdminLogin'
-
+import StudentProjectCreate from './components/StudentProjectCreate'
+import StudentSubmissionList from './components/StudentSubmissionList'
+import StaffProjectValidation from './components/StaffProjectValidation'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,6 +41,10 @@ const router = createBrowserRouter(
         <Route path='ProjectCreate' element={<ProjectCreate />} />
         <Route path='requests' element={<RequestList />} />
         <Route path='studentrequests' element={<StudentRequestList />} />
+        <Route path='studentsubmit' element={<StudentProjectCreate />} />
+        <Route path='staffprojectvalidation/:id' element={<StaffProjectValidation />} />
+        <Route path='studentsubmissionlist' element={<StudentSubmissionList />} />
+
 
         {/* Admin Routes */}
         <Route path='admindashboard' element={<AdminDashboard />} />
