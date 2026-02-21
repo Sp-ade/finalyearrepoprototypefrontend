@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Box, Typography, Button, Paper, Container, Divider, CircularProgress } from '@mui/material'
+import { useProjectView } from '../hooks/useProjectView'
+import { useAccessRequest } from '../hooks/useAccessRequest'
 import ProjectDelete from './ProjectDelete'
-import API_URL from '../config'
 import ProjectDetails from './project/ProjectDetails'
 import DocumentList from './project/DocumentList'
 import AccessRequestDialog from './project/AccessRequestDialog'
@@ -10,89 +11,15 @@ import AccessRequestDialog from './project/AccessRequestDialog'
 const ProjectView = () => {
     const { id } = useParams()
     const navigate = useNavigate()
-    const [project, setProject] = useState(null)
-    const [loading, setLoading] = useState(true)
-
-    // Request Dialog State
-    const [openRequestDialog, setOpenRequestDialog] = useState(false);
-    const [requestReason, setRequestReason] = useState('');
-    const [submittingRequest, setSubmittingRequest] = useState(false);
-
-    useEffect(() => {
-        const studentId = localStorage.getItem('userId');
-        const url = studentId
-            ? `${API_URL}/api/projects/${id}?studentId=${studentId}`
-            : `${API_URL}/api/projects/${id}`;
-
-        fetch(url)
-            .then(res => {
-                if (!res.ok) throw new Error('Project not found')
-                return res.json()
-            })
-            .then(data => {
-                setProject(data)
-                setLoading(false)
-            })
-            .catch(err => {
-                console.error(err)
-                setLoading(false)
-            })
-    }, [id])
-
-    const handleOpenRequestDialog = () => setOpenRequestDialog(true);
-    const handleCloseRequestDialog = () => {
-        setOpenRequestDialog(false);
-        setRequestReason('');
-    };
+    const { project, loading } = useProjectView(id)
+    const { openDialog, reason, submitting, submitRequest, setOpenDialog, setReason, closeDialog } = useAccessRequest()
 
     const handleSubmitRequest = async () => {
-        const studentId = localStorage.getItem('userId');
-        const userRole = localStorage.getItem('role');
-
-        if (!studentId) {
-            alert('You must be logged in to request access.');
-            return;
+        const success = await submitRequest(project.id || project.project_id)
+        if (success) {
+            closeDialog()
         }
-
-        if (userRole !== 'student') {
-            alert('Only students can request project access.');
-            return;
-        }
-
-        if (!requestReason.trim()) {
-            alert('Please provide a reason for your request.');
-            return;
-        }
-
-        setSubmittingRequest(true);
-        try {
-            const response = await fetch(`${API_URL}/api/requests`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    studentId: studentId,
-                    projectId: project.id || project.project_id,
-                    reason: requestReason
-                }),
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                alert('Request submitted successfully!');
-                handleCloseRequestDialog();
-            } else if (response.status === 409) {
-                alert(data.message || 'You have already requested this project.');
-                handleCloseRequestDialog();
-            } else {
-                throw new Error(data.message || 'Failed to submit request');
-            }
-        } catch (error) {
-            console.error('Error submitting request:', error);
-            alert(`Error: ${error.message}`);
-        } finally {
-            setSubmittingRequest(false);
-        }
-    };
+    }
 
     if (loading) {
         return (
@@ -120,8 +47,8 @@ const ProjectView = () => {
         )
     }
 
-    const documents = project.attachments || project.artifacts || [];
-    const canViewArtifacts = project.hasAccess || localStorage.getItem('role') !== 'student';
+    const documents = project.attachments || project.artifacts || []
+    const canViewArtifacts = project.hasAccess || localStorage.getItem('role') !== 'student'
 
     return (
         <Box sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', py: 4 }}>
@@ -166,7 +93,7 @@ const ProjectView = () => {
                             <Button
                                 variant="contained"
                                 size="large"
-                                onClick={handleOpenRequestDialog}
+                                onClick={() => setOpenDialog(true)}
                                 sx={{
                                     px: 6, py: 1.5, fontSize: '1.1rem', fontWeight: 600,
                                     borderRadius: 2, textTransform: 'none', boxShadow: 3,
@@ -188,16 +115,16 @@ const ProjectView = () => {
             </Container>
 
             <AccessRequestDialog
-                open={openRequestDialog}
-                onClose={handleCloseRequestDialog}
+                open={openDialog}
+                onClose={closeDialog}
                 onSubmit={handleSubmitRequest}
-                reason={requestReason}
-                setReason={setRequestReason}
+                reason={reason}
+                setReason={setReason}
                 projectTitle={project.title}
-                loading={submittingRequest}
+                loading={submitting}
             />
         </Box>
     )
 }
 
-export default ProjectView;
+export default ProjectView

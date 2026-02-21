@@ -1,85 +1,95 @@
-import React from 'react';
-import { Stack, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import React from 'react'
+import { Box, TextField, Stack, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material'
 
-const ProjectFormFields = ({
-    title, setTitle,
-    category, setCategory,
-    academicYear, setAcademicYear,
-    selectedSupervisor, setSelectedSupervisor,
-    supervisors,
-    description, setDescription,
-    tags, setTags
+const PROJECT_TYPES = ['Design', 'Development', 'Research']
+
+const ProjectFormFields = ({ 
+  projectData, 
+  onFieldChange,
+  supervisor 
 }) => {
-    return (
-        <Stack spacing={3} sx={{ mt: 3 }}>
-            <TextField
-                label="Project Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                fullWidth
-                required
-            />
+  const handleChange = (field) => (event) => {
+    onFieldChange(field, event.target.value)
+  }
 
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl fullWidth required>
-                    <InputLabel>Category</InputLabel>
-                    <Select
-                        value={category}
-                        label="Category"
-                        onChange={(e) => setCategory(e.target.value)}
-                    >
-                        <MenuItem value="Design">Design</MenuItem>
-                        <MenuItem value="Development">Development</MenuItem>
-                        <MenuItem value="Research">Research</MenuItem>
-                        <MenuItem value="Case Study">Case Study</MenuItem>
-                    </Select>
-                </FormControl>
+  return (
+    <Stack spacing={2}>
+      <TextField
+        label="Project Title"
+        value={projectData.projectTitle}
+        onChange={handleChange('projectTitle')}
+        fullWidth
+        placeholder="Enter project title"
+      />
 
-                <TextField
-                    label="Academic Year"
-                    value={academicYear}
-                    onChange={(e) => setAcademicYear(e.target.value)}
-                    fullWidth
-                    required
-                />
-            </Stack>
+      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+        <TextField
+          label="Academic Year"
+          value={projectData.academicYear}
+          onChange={handleChange('academicYear')}
+          sx={{ width: { sm: 200 } }}
+          placeholder={new Date().getFullYear().toString()}
+        />
 
-            <FormControl fullWidth required>
-                <InputLabel>Select Supervisor</InputLabel>
-                <Select
-                    value={selectedSupervisor}
-                    label="Select Supervisor"
-                    onChange={(e) => setSelectedSupervisor(e.target.value)}
-                >
-                    {supervisors.map((sup) => (
-                        <MenuItem key={sup.id} value={sup.id}>
-                            {sup.first_name} {sup.last_name}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+        <FormControl sx={{ minWidth: 200 }} size="small">
+          <InputLabel id="project-type-label">Project Type</InputLabel>
+          <Select
+            labelId="project-type-label"
+            value={projectData.projectType}
+            label="Project Type"
+            onChange={handleChange('projectType')}
+          >
+            {PROJECT_TYPES.map(type => (
+              <MenuItem key={type} value={type}>{type}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-            <TextField
-                label="Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                multiline
-                rows={6}
-                fullWidth
-                required
-                placeholder="Describe your project"
-            />
+        <TextField
+          label="Grade"
+          value={projectData.grade}
+          onChange={handleChange('grade')}
+          sx={{ width: 160 }}
+          placeholder="A, B, C, etc."
+        />
+      </Stack>
 
-            <TextField
-                label="Tags"
-                placeholder="tag1, tag2, tag3"
-                value={tags}
-                onChange={e => setTags(e.target.value)}
-                fullWidth
-                helperText="Separate tags with commas"
-            />
-        </Stack>
-    );
-};
+      <TextField
+        label="Description"
+        value={projectData.description}
+        onChange={handleChange('description')}
+        multiline
+        rows={4}
+        fullWidth
+        placeholder="Enter project description"
+      />
 
-export default ProjectFormFields;
+      <TextField
+        label="Final Remark"
+        value={projectData.finalRemark}
+        onChange={handleChange('finalRemark')}
+        multiline
+        rows={2}
+        fullWidth
+        placeholder="Evaluation remarks and feedback"
+      />
+
+      <TextField
+        label="Tags"
+        placeholder="tag1, tag2, tag3"
+        value={projectData.tags}
+        onChange={handleChange('tags')}
+        fullWidth
+        helperText="Separate tags with commas"
+      />
+
+      <Box sx={{ p: 1.5, bgcolor: 'action.hover', borderRadius: 1 }}>
+        <Typography variant="body1">
+          <strong>Supervisor:</strong> {supervisor}
+        </Typography>
+      </Box>
+    </Stack>
+  )
+}
+
+export default ProjectFormFields
