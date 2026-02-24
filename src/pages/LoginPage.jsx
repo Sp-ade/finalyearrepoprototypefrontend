@@ -18,9 +18,9 @@ const LoginPage = () => {
 
     return (
         <div>
-            {loginType === 'student' && <StudentLogin onSwitch={toggleLoginType} />}
-            {loginType === 'staff' && <StaffLogin onSwitch={toggleLoginType} />}
-            {loginType === 'admin' && <AdminLogin onSwitch={toggleLoginType} />}
+            {loginType === 'student' && <StudentLogin onSwitch={toggleLoginType} onSetType={setLoginType} />}
+            {loginType === 'staff' && <StaffLogin onSwitch={toggleLoginType} onSetType={setLoginType} />}
+            {loginType === 'admin' && <AdminLogin onSwitch={toggleLoginType} onSetType={setLoginType} />}
         </div>
     )
 }

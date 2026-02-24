@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { Container, Box, Paper, Typography, TextField, Button } from '@mui/material'
 import API_URL from '../config'
 
-const StaffLogin = ({ onSwitch }) => {
+const StaffLogin = ({ onSwitch, onSetType }) => {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
@@ -78,6 +78,7 @@ const StaffLogin = ({ onSwitch }) => {
                             <Button type="submit" variant="contained" color="primary" fullWidth sx={{ background: 'linear-gradient(90deg, #2dcd45ff 0%, #31ef4eff 100%)' }} disabled={loading}>{loading ? 'Signing in…' : 'Log In'}</Button>
                             {error && <Typography sx={{ color: 'red', mt: 1 }}>{error}</Typography>}
                             <Typography sx={{ fontSize: "0.8rem", opacity: "60%" }}>Create your account here. <Link to="/signup?role=supervisor" style={{ textDecoration: 'underline', color: 'inherit' }}>sign up</Link></Typography>
+                            <Typography sx={{ fontSize: "0.8rem", opacity: "60%", mt: 1 }}>Not a staff? <span onClick={() => onSetType('student')} style={{ textDecoration: 'underline', color: 'inherit', cursor: 'pointer' }}>Back to Student Login</span></Typography>
                             <br />
                             <Typography sx={{ fontSize: "0.8rem", }}>NOTE: use your school mail and password here</Typography>
                             <br />

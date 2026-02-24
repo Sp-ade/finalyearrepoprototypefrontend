@@ -71,7 +71,7 @@ const AccountInformation = () => {
     }
 
     return (
-        <Paper elevation={1} sx={{ p: '20px 0px 20px 0px', bgcolor: 'white', borderRadius: 0, width: '100%' }}>
+        <Paper elevation={1} sx={{ p: '20px 32px', bgcolor: 'white', borderRadius: 0, width: '100%', margin: 0, boxSizing: 'border-box' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                     Account Information

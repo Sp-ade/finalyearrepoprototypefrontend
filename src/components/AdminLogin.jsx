@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Container, Box, Paper, Typography, TextField, Button } from '@mui/material'
 import API_URL from '../config'
-const AdminLogin = ({ onSwitch }) => {
+const AdminLogin = ({ onSwitch, onSetType }) => {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
@@ -67,7 +67,7 @@ const AdminLogin = ({ onSwitch }) => {
                             <br />
                             <Typography sx={{ fontSize: "0.8rem", }}>NOTE: Admin access only</Typography>
                             <br />
-                            <Typography sx={{ fontSize: "0.8rem", opacity: "60%" }}>Not an admin? <span onClick={onSwitch} style={{ textDecoration: 'underline', color: 'inherit', cursor: 'pointer' }}>Go back</span></Typography>
+                            <Typography sx={{ fontSize: "0.8rem", opacity: "60%" }}>Not an admin? <span onClick={() => onSetType('student')} style={{ textDecoration: 'underline', color: 'inherit', cursor: 'pointer' }}>Go back to Student Login</span></Typography>
                         </Box>
                     </Box>
 

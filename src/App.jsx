@@ -1,5 +1,6 @@
 import React from 'react'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
+import { CssBaseline } from '@mui/material'
 import MainLayout from './Layouts/MainLayout'
 import Start from './components/Start'
 import StaffBrowse from './components/StaffBrowse'
@@ -10,6 +11,7 @@ import ProjectCreate from './components/ProjectCreate'
 import RequestList from './components/RequestList'
 import StudentRequestList from './components/StudentRequestList'
 import Signup from './components/Signup'
+import VerifyTest from './verifytest'
 import ProjectView from './components/ProjectView'
 import StaffProjectView from './components/StaffProjectView'
 import LoginPage from './pages/LoginPage'
@@ -29,6 +31,7 @@ const router = createBrowserRouter(
       <Route path='login' element={<LoginPage />} />
       <Route path='adminlogin' element={<AdminLogin />} />
       <Route path='signup' element={<Signup />} />
+      <Route path='verifytest' element={<VerifyTest />} />
 
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
@@ -56,7 +59,10 @@ const router = createBrowserRouter(
 )
 const App = () => {
   return (
-    <RouterProvider router={router} />
+    <>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </>
   )
 }
 
