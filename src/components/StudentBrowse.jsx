@@ -61,11 +61,12 @@ const StudentBrowse = () => {
 
   const filtered = useMemo(() => {
     return projects.filter(p => {
-      const matchesQuery = p.name ? p.name.toLowerCase().includes(query.trim().toLowerCase()) : false
+      const matchesQuery = p.name?.toLowerCase().includes(query.trim().toLowerCase()) ||
+        (p.studentNames && Array.isArray(p.studentNames) && p.studentNames.some(name => name.toLowerCase().includes(query.trim().toLowerCase())))
       const matchesCategory = filter === 'All' || p.category === filter
       const matchesYear = yearFilter === 'All' || p.year === yearFilter
       const matchesSupervisor = supervisorFilter === 'All' || p.supervisor === supervisorFilter
-      const matchesStudent = studentFilter === p.studentNames ? p.studentNames : false
+      const matchesStudent = studentFilter === '' || studentFilter === 'All' || (p.studentNames && Array.isArray(p.studentNames) && p.studentNames.includes(studentFilter))
 
       // Tag matching: project must have ALL selected tags (AND logic)
       let matchesTags = true
