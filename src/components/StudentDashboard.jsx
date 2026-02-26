@@ -13,7 +13,7 @@ import heroimage from '../assets/Nile-Matriculation.jpg'
 const StudentDashboard = () => {
   const navigate = useNavigate()
   const [showStatusDialog, setShowStatusDialog] = useState(false)
-  
+
   const { firstName, lastName, userId } = useDashboardUser()
   const {
     approvedProjects,
@@ -22,6 +22,7 @@ const StudentDashboard = () => {
     statusLoading,
     stats,
     checkSubmissionStatus,
+    myProject
   } = useStudentDashboard(userId)
 
   const handleCheckStatus = async () => {
@@ -42,10 +43,10 @@ const StudentDashboard = () => {
   return (
     <Box sx={{ p: 0, pb: 10, width: '100%' }}>
       {/* Hero Section */}
-      <HeroSection 
-        backgroundImage={heroimage} 
-        firstName={firstName} 
-        lastName={lastName} 
+      <HeroSection
+        backgroundImage={heroimage}
+        firstName={firstName}
+        lastName={lastName}
       />
 
       {/* Account Information */}
@@ -58,18 +59,18 @@ const StudentDashboard = () => {
 
       {/* Action Buttons */}
       <Stack direction="row" spacing={2} sx={{ mt: 4, mb: 4 }} justifyContent="center" flexWrap="wrap">
-        <Button 
-          variant="contained" 
-          color="primary" 
-          size="large" 
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
           onClick={() => navigate('/studentbrowse')}
         >
           Explore Projects
         </Button>
-        <Button 
-          variant="outlined" 
-          color="primary" 
-          size="large" 
+        <Button
+          variant="outlined"
+          color="primary"
+          size="large"
           onClick={() => navigate('/studentrequests')}
         >
           My Requests
@@ -94,6 +95,18 @@ const StudentDashboard = () => {
         onBrowseClick={() => navigate('/studentbrowse')}
         buttonText="View Project"
       />
+
+      {/* My Project Section */}
+      {myProject && (
+        <ProjectsSection
+          title="My Submitted Project"
+          projects={[myProject]}
+          loading={statusLoading}
+          emptyMessage=""
+          onBrowseClick={() => { }}
+          buttonText="View Project"
+        />
+      )}
 
       {/* Submission Status Dialog */}
       <SubmissionStatusDialog

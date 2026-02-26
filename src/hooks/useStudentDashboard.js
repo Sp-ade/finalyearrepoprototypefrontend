@@ -7,6 +7,7 @@ export const useStudentDashboard = (userId) => {
   const [loading, setLoading] = useState(true)
   const [submissionStatus, setSubmissionStatus] = useState(null)
   const [statusLoading, setStatusLoading] = useState(false)
+  const [myProject, setMyProject] = useState(null)
 
   // Fetch requests and approved projects
   useEffect(() => {
@@ -57,15 +58,26 @@ export const useStudentDashboard = (userId) => {
     }
 
     fetchDashboardData()
+    handleCheckSubmission()
   }, [userId])
 
-  const checkSubmissionStatus = async () => {
+  const handleCheckSubmission = async () => {
+    if (!userId) return
     setStatusLoading(true)
     try {
       const response = await fetch(`${API_URL}/api/submissions/student/${userId}`)
       if (response.ok) {
         const data = await response.json()
         setSubmissionStatus(data)
+
+        // If approved, fetch the actual project data
+        if (data.submission && data.submission.status === 'Approved' && data.submission.project_id) {
+          const projRes = await fetch(`${API_URL}/api/projects/${data.submission.project_id}`)
+          if (projRes.ok) {
+            const projData = await projRes.json()
+            setMyProject(projData.project || projData)
+          }
+        }
       } else {
         setSubmissionStatus({ submitted: false })
       }
@@ -75,6 +87,10 @@ export const useStudentDashboard = (userId) => {
     } finally {
       setStatusLoading(false)
     }
+  }
+
+  const checkSubmissionStatus = async () => {
+    await handleCheckSubmission()
   }
 
   const approvedCount = requests.filter(r => r.status?.toLowerCase() === 'approved').length
@@ -94,6 +110,7 @@ export const useStudentDashboard = (userId) => {
     statusLoading,
     stats,
     checkSubmissionStatus,
-    setSubmissionStatus
+    setSubmissionStatus,
+    myProject
   }
 }

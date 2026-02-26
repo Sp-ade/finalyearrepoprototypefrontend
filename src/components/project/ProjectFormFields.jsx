@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, TextField, Stack, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material'
 
-const PROJECT_TYPES = ['Design', 'Development', 'Research']
+const DEPARTMENTS = ['IT', 'Software eng.', 'computer sci.', 'cybersecurity']
 
 const ProjectFormFields = ({
   // For Staff (Object based)
@@ -68,15 +68,15 @@ const ProjectFormFields = ({
         />
 
         <FormControl sx={{ minWidth: 200 }} size="small">
-          <InputLabel id="project-type-label">Project Type</InputLabel>
+          <InputLabel id="department-label">Department</InputLabel>
           <Select
-            labelId="project-type-label"
+            labelId="department-label"
             value={getVal('projectType')}
-            label="Project Type"
+            label="Department"
             onChange={handleChange('projectType')}
           >
-            {PROJECT_TYPES.map(type => (
-              <MenuItem key={type} value={type}>{type}</MenuItem>
+            {DEPARTMENTS.map(dept => (
+              <MenuItem key={dept} value={dept}>{dept}</MenuItem>
             ))}
           </Select>
         </FormControl>

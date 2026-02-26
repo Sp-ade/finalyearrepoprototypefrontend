@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect, useRef } from 'react'
 import { Box, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Typography, Button, Chip, Stack } from '@mui/material'
 import PageHeader from './common/PageHeader'
 import heroImage from '../assets/scott-unsplash.jpg'
@@ -15,6 +15,7 @@ const StudentBrowse = () => {
   const [supervisorFilter, setSupervisorFilter] = useState('All')
   const [selectedTags, setSelectedTags] = useState([])
   const [projects, setProjects] = useState([])
+  const projectsRef = useRef(null)
 
   useEffect(() => {
     fetch(`${API_URL}/api/projects`)
@@ -33,7 +34,7 @@ const StudentBrowse = () => {
 
   const supervisors = useMemo(() => ['All', ...Array.from(new Set(projects.map(p => p.supervisor).filter(Boolean)))], [projects])
 
-  const students = useMemo(() => ['All', ...Array.from(new Set(projects.flatMap(p => p.studentNames || []).filter(Boolean)))], [projects])
+  const students = useMemo(() => ['All', ...Array.from(new Set(projects.flatMap(p => p.Studentnames || []).filter(Boolean)))], [projects])
 
   const allTags = useMemo(() => {
     const tagSet = new Set()
@@ -61,12 +62,15 @@ const StudentBrowse = () => {
 
   const filtered = useMemo(() => {
     return projects.filter(p => {
-      const matchesQuery = p.name?.toLowerCase().includes(query.trim().toLowerCase()) ||
-        (p.studentNames && Array.isArray(p.studentNames) && p.studentNames.some(name => name.toLowerCase().includes(query.trim().toLowerCase())))
+      const matchesQuery =
+        p.name?.toLowerCase().includes(query.trim().toLowerCase()) ||
+        p.title?.toLowerCase().includes(query.trim().toLowerCase()) ||
+        p.category?.toLowerCase().includes(query.trim().toLowerCase()) ||
+        (p.Studentnames && Array.isArray(p.Studentnames) && p.Studentnames.some(name => name.toLowerCase().includes(query.trim().toLowerCase())))
       const matchesCategory = filter === 'All' || p.category === filter
       const matchesYear = yearFilter === 'All' || p.year === yearFilter
       const matchesSupervisor = supervisorFilter === 'All' || p.supervisor === supervisorFilter
-      const matchesStudent = studentFilter === '' || studentFilter === 'All' || (p.studentNames && Array.isArray(p.studentNames) && p.studentNames.includes(studentFilter))
+      const matchesStudent = studentFilter === '' || studentFilter === 'All' || (p.Studentnames && Array.isArray(p.Studentnames) && p.Studentnames.includes(studentFilter))
 
       // Tag matching: project must have ALL selected tags (AND logic)
       let matchesTags = true
@@ -82,6 +86,13 @@ const StudentBrowse = () => {
     })
   }, [query, filter, yearFilter, supervisorFilter, selectedTags, projects, studentFilter])
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault()
+    if (projectsRef.current) {
+      projectsRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <Box>
       <Box sx={{
@@ -90,23 +101,25 @@ const StudentBrowse = () => {
       }}>
         {/* search bar at the start of the page */}
         <Box sx={{ mb: 3, width: '80%' }}>
-          <TextField
-            fullWidth
-            label="Search projects"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            sx={{
-              bgcolor: 'white',
-              width: "100%",
-              borderRadius: "40px",
-              '& .MuiOutlinedInput-root': {
-                borderRadius: '40px',
-                '& fieldset': {
+          <form onSubmit={handleSearchSubmit}>
+            <TextField
+              fullWidth
+              label="Search projects"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              sx={{
+                bgcolor: 'white',
+                width: "100%",
+                borderRadius: "40px",
+                '& .MuiOutlinedInput-root': {
                   borderRadius: '40px',
+                  '& fieldset': {
+                    borderRadius: '40px',
+                  },
                 },
-              },
-            }}
-          />
+              }}
+            />
+          </form>
         </Box>
       </Box>
       <Box sx={{ p: { xs: 2, md: 4 } }}>
@@ -120,11 +133,11 @@ const StudentBrowse = () => {
           {/* Filter dropdowns */}
           <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
             <FormControl sx={{ minWidth: 160 }} size="small">
-              <InputLabel id="category-label">Category</InputLabel>
+              <InputLabel id="department-label">Department</InputLabel>
               <Select
-                labelId="category-label"
+                labelId="department-label"
                 value={filter}
-                label="Category"
+                label="Department"
                 onChange={e => setFilter(e.target.value)}
               >
                 {categories.map(c => (
@@ -209,7 +222,7 @@ const StudentBrowse = () => {
         </Box>
 
         {/* project cards grid (forced two columns) */}
-        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 3, maxWidth: 1100, mx: 'auto' }}>
+        <Box ref={projectsRef} sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 3, maxWidth: 1100, mx: 'auto' }}>
           {filtered.map(p => (
             <Box key={p.id} sx={{ width: '100%' }}>
               <Card project={p} buttonText="View Project" />
