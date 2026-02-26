@@ -29,7 +29,7 @@ const Card = ({ project = { name: 'Project', title: 'Untitled', description: 'No
     }
   }
 
-  console.log('Project:', project.name, 'Tags:', tags, 'Raw Tags:', rawTags)
+  console.log('Project:', project.title, 'Tags:', tags, 'Raw Tags:', rawTags)
 
   const handleClick = () => {
     if (buttonText === 'View Project' && project.id) {

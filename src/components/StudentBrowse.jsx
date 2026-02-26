@@ -10,6 +10,7 @@ import API_URL from '../config'
 const StudentBrowse = () => {
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState('All')
+  const [studentFilter, setStudentFilter] = useState('All')
   const [yearFilter, setYearFilter] = useState('All')
   const [supervisorFilter, setSupervisorFilter] = useState('All')
   const [selectedTags, setSelectedTags] = useState([])
@@ -32,6 +33,7 @@ const StudentBrowse = () => {
 
   const supervisors = useMemo(() => ['All', ...Array.from(new Set(projects.map(p => p.supervisor).filter(Boolean)))], [projects])
 
+  const students = useMemo(() => ['All', ...Array.from(new Set(projects.flatMap(p => p.student_names || []).filter(Boolean)))], [projects])
   const allTags = useMemo(() => {
     const tagSet = new Set()
     projects.forEach(p => {
