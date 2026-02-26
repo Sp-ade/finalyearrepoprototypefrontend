@@ -23,7 +23,7 @@ import AdminLogin from './components/AdminLogin'
 import StudentProjectCreate from './components/StudentProjectCreate'
 import StudentSubmissionList from './components/StudentSubmissionList'
 import StaffProjectValidation from './components/StaffProjectValidation'
-
+import NotFoundPage from './NotFoundPage.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<MainLayout />}>
@@ -32,6 +32,8 @@ const router = createBrowserRouter(
       <Route path='adminlogin' element={<AdminLogin />} />
       <Route path='signup' element={<Signup />} />
       <Route path='verifytest' element={<VerifyTest />} />
+      <Route path='*' element={<NotFoundPage />} />
+      
 
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
