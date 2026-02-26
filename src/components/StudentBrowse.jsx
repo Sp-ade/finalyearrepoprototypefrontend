@@ -10,7 +10,7 @@ import API_URL from '../config'
 const StudentBrowse = () => {
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState('All')
-  const [studentFilter, setStudentFilter] = useState('All')
+  const [studentFilter, setStudentFilter] = useState('')
   const [yearFilter, setYearFilter] = useState('All')
   const [supervisorFilter, setSupervisorFilter] = useState('All')
   const [selectedTags, setSelectedTags] = useState([])
@@ -33,7 +33,8 @@ const StudentBrowse = () => {
 
   const supervisors = useMemo(() => ['All', ...Array.from(new Set(projects.map(p => p.supervisor).filter(Boolean)))], [projects])
 
-  const students = useMemo(() => ['All', ...Array.from(new Set(projects.flatMap(p => p.student_names || []).filter(Boolean)))], [projects])
+  const students = useMemo(() => ['All', ...Array.from(new Set(projects.flatMap(p => p.studentNames || []).filter(Boolean)))], [projects])
+
   const allTags = useMemo(() => {
     const tagSet = new Set()
     projects.forEach(p => {
@@ -64,6 +65,7 @@ const StudentBrowse = () => {
       const matchesCategory = filter === 'All' || p.category === filter
       const matchesYear = yearFilter === 'All' || p.year === yearFilter
       const matchesSupervisor = supervisorFilter === 'All' || p.supervisor === supervisorFilter
+      const matchesStudent = studentFilter === p.studentNames ? p.studentNames : false
 
       // Tag matching: project must have ALL selected tags (AND logic)
       let matchesTags = true
@@ -75,9 +77,9 @@ const StudentBrowse = () => {
         matchesTags = selectedTags.every(selectedTag => projectTagNames.includes(selectedTag))
       }
 
-      return matchesQuery && matchesCategory && matchesYear && matchesSupervisor && matchesTags
+      return matchesQuery && matchesCategory && matchesYear && matchesSupervisor && matchesStudent && matchesTags
     })
-  }, [query, filter, yearFilter, supervisorFilter, selectedTags, projects])
+  }, [query, filter, yearFilter, supervisorFilter, selectedTags, projects, studentFilter])
 
   return (
     <Box>
