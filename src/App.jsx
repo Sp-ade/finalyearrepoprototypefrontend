@@ -34,12 +34,12 @@ const router = createBrowserRouter(
       <Route path='verifytest' element={<VerifyTest />} />
       <Route path='*' element={<NotFoundPage />} />
       
-
+<Route path='staffdashboard' element={<StaffDashboard />} />
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
         <Route path='staffbrowse' element={<StaffBrowse />} />
         <Route path='staff/project/:id' element={<StaffProjectView />} />
-        <Route path='staffdashboard' element={<StaffDashboard />} />
+        
         <Route path='studentbrowse' element={<StudentBrowse />} />
         <Route path='project/:id' element={<ProjectView />} />
         <Route path='studentdashboard' element={<StudentDashboard />} />
