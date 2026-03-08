@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Grid, Button, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Container } from '@mui/material'
 import { useNavigate } from 'react-router'
 import { useDashboardUser } from '../hooks/useDashboardUser'
 import { useStaffDashboard } from '../hooks/useStaffDashboard'
@@ -15,7 +15,14 @@ const StaffDashboard = () => {
   const { stats, recentProjects, loading } = useStaffDashboard(userId)
 
   return (
-    <Box sx={{ p: 0, margin: 0, width: '100%' }}>
+    <Box
+      sx={{
+        width: '100%',
+        maxWidth: '100vw',
+        overflowX: 'hidden'   // 🚨 Prevent horizontal scrolling
+      }}
+    >
+
       {/* Hero Section */}
       <HeroSection
         backgroundImage={heroimage}
@@ -24,12 +31,14 @@ const StaffDashboard = () => {
       />
 
       {/* Account Information */}
-      <Box sx={{ margin: 0, padding: 0 }}>
+      <Box sx={{ mb: { xs: 3, md: 4 }, width: '100%' }}>
         <AccountInformation />
       </Box>
 
       {/* Statistics */}
-      <StatisticsGrid stats={stats} />
+      <Box sx={{ mb: { xs: 4, md: 5 }, width: '100%' }}>
+        <StatisticsGrid stats={stats} />
+      </Box>
 
       {/* Action Buttons */}
       <Stack direction="row" spacing={2} sx={{ mt: 4, mb: 4 }} justifyContent="center" flexWrap="wrap">
@@ -56,17 +65,21 @@ const StaffDashboard = () => {
         </Button>
       </Stack>
 
-      {/* Recent Uploads Section */}
-      <ProjectsSection
-        title="Recent Uploads"
-        projects={recentProjects}
-        loading={loading}
-        emptyMessage="No projects uploaded yet. Click 'Upload Projects' to get started!"
-        maxItems={3}
-        onBrowseClick={() => navigate('/staffbrowse')}
-        buttonText="Manage Project"
-      />
-    </Box>
+      {/* Recent Uploads */}
+      <Box sx={{ width: '100%' }}>
+        <ProjectsSection
+          title="Recent Uploads"
+          projects={recentProjects}
+          loading={loading}
+          emptyMessage="No projects uploaded yet. Click 'Upload Projects' to get started!"
+          maxItems={3}
+          onBrowseClick={() => navigate('/staffbrowse')}
+          buttonText="Manage Project"
+        />
+      </Box>
+
+    </Container>
+    </Box >
   )
 }
 

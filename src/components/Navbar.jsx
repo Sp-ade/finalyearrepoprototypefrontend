@@ -44,6 +44,14 @@ const Navbar = () => {
     navigate('/login')
   }
 
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleMenuClose = () => {
+    setAnchorEl(null)
+  }
+
   const navLinks = [
     { title: 'Contacts', path: '#' },
     { title: 'Dashboard', path: dashboardRoute },
