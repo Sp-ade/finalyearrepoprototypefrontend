@@ -32,7 +32,7 @@ const StudentLogin = ({ onSetType }) => {
       localStorage.setItem('role', data.user.role);
       navigate('/');
     } catch (err) {
-      setError("server not running " || err.message);
+      setError(err.message);
     } finally {
       setLoading(false);
     }
