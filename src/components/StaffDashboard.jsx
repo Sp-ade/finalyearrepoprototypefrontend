@@ -78,7 +78,7 @@ const StaffDashboard = () => {
         />
       </Box>
 
-    </Container>
+
     </Box >
   )
 }
