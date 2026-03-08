@@ -3,7 +3,7 @@ import {
     Dialog, DialogTitle, DialogContent,
     DialogContentText, TextField, DialogActions, Button
 } from '@mui/material';
-
+//Dialog box when student requests access to a project
 const AccessRequestDialog = ({
     open, onClose, onSubmit,
     reason, setReason, projectTitle, loading

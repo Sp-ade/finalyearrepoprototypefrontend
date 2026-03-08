@@ -1,11 +1,11 @@
 import React from 'react'
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Grid, Typography, Chip, TextField, Box, Alert, Divider } from '@mui/material'
 import { getStatusColor, formatDate } from '../../hooks/useRequestsList'
-
-const RequestDetailDialog = ({ 
-  open, 
-  onClose, 
-  request, 
+//requestlist cards for staff and student for access of project views
+const RequestDetailDialog = ({
+  open,
+  onClose,
+  request,
   mode = 'view',
   responseText = '',
   onResponseChange,

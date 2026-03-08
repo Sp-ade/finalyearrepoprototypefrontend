@@ -17,6 +17,27 @@ export const useProjectView = (projectId) => {
         const res = await fetch(url)
         if (!res.ok) throw new Error('Project not found')
         const data = await res.json()
+
+        // For students, check if their matric number is in the project's StudentIDs
+        const role = localStorage.getItem('role')
+        const email = localStorage.getItem('email')
+
+        if (role === 'student' && email && data.StudentIDs && data.StudentIDs.length > 0) {
+          try {
+            const meRes = await fetch(`${API_URL}/api/auth/me?email=${encodeURIComponent(email)}`)
+            if (meRes.ok) {
+              const meData = await meRes.json()
+              const matricNo = meData.matricNo
+              if (matricNo && data.StudentIDs.includes(matricNo)) {
+                data.hasAccess = true
+              }
+            }
+          } catch (err) {
+            // Non-fatal: if we can't check, access stays as-is
+            console.error('Could not verify project membership:', err)
+          }
+        }
+
         setProject(data)
         setError(null)
       } catch (err) {

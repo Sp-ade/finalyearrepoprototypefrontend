@@ -81,6 +81,7 @@ const StaffProjectValidation = () => {
               studentName={`${submission.student_first_name} ${submission.student_last_name}`}
               studentEmail={submission.student_email}
               submissionDate={submission.requested_at}
+              studentsInvolved={project.Studentnames}
             />
 
             <ReviewActionCard

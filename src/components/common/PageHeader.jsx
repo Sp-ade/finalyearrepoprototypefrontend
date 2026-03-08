@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { ArrowBack } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-
+//Page header for both dashboards student and staff
 const PageHeader = ({ title, subtitle, showBack = true, onBack }) => {
     const navigate = useNavigate();
 

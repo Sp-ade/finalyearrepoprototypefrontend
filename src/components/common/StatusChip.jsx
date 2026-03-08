@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chip } from '@mui/material';
-
+//status identifiers for multiple pages
 const StatusChip = ({ status, sx = {} }) => {
     const getStatusColor = (status) => {
         const s = status?.toLowerCase();

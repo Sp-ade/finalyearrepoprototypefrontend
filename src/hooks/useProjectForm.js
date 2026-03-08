@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import API_URL from '../config'
-
+//logic for project creation
 export const useProjectForm = () => {
   const [projectData, setProjectData] = useState({
     projectTitle: '',
@@ -97,6 +97,7 @@ export const useProjectForm = () => {
 
     try {
       const studentNames = students.map(s => s.name).filter(Boolean)
+      const studentIds = students.map(s => s.id).filter(Boolean)
       const attachments = await uploadFiles()
       const tagArray = projectData.tags.split(',').map(t => t.trim()).filter(Boolean)
 
@@ -107,6 +108,7 @@ export const useProjectForm = () => {
         supervisor: localStorage.getItem('userName') || 'TBD',
         StudentCount: studentNames.length,
         Studentnames: studentNames,
+        StudentIDs: studentIds,
         Tags: tagArray,
         category: projectData.projectType || 'General',
         year: projectData.academicYear || new Date().getFullYear().toString(),

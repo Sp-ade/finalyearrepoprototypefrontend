@@ -1,11 +1,11 @@
 import React from 'react'
 import { Box, Typography, Button } from '@mui/material'
-
-const FileUploadField = ({ 
-  index, 
-  file, 
-  onFileChange, 
-  onClear 
+//drag and drop file upload of project create, the input 
+const FileUploadField = ({
+  index,
+  file,
+  onFileChange,
+  onClear
 }) => {
   const handleDragOver = (e) => {
     e.preventDefault()

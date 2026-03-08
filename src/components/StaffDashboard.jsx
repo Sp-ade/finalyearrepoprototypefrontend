@@ -17,10 +17,10 @@ const StaffDashboard = () => {
   return (
     <Box sx={{ p: 0, margin: 0, width: '100%' }}>
       {/* Hero Section */}
-      <HeroSection 
-        backgroundImage={heroimage} 
-        firstName={firstName} 
-        lastName={lastName} 
+      <HeroSection
+        backgroundImage={heroimage}
+        firstName={firstName}
+        lastName={lastName}
       />
 
       {/* Account Information */}
@@ -33,24 +33,26 @@ const StaffDashboard = () => {
 
       {/* Action Buttons */}
       <Stack direction="row" spacing={2} sx={{ mt: 4, mb: 4 }} justifyContent="center" flexWrap="wrap">
-        <Button 
-          variant="contained" 
-          size="large" 
-          sx={{ bgcolor: '#5fef6bff', color: 'white', '&:hover': { backgroundColor: '#77fa82ff' } }} 
+        <Button
+          variant="contained"
+          size="large"
+          sx={{ bgcolor: '#5fef6bff', color: 'white', '&:hover': { backgroundColor: '#77fa82ff' } }}
           onClick={() => navigate('/staffbrowse')}
         >
           Explore Projects
         </Button>
-        <Button 
-          variant="contained" 
-          color="primary" 
-          size="large" 
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
           onClick={() => navigate('/projectcreate')}
         >
           Upload Projects
         </Button>
-        <Button variant="outlined" size="large">
-          Learn More
+        <Button variant="outlined" size="large"
+          onClick={() => navigate('/studentsubmissionlist')}
+        >
+          View Student submissions
         </Button>
       </Stack>
 

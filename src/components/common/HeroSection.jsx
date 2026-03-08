@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
-
+//Hero section for both dashboards student and staff
 const HeroSection = ({ backgroundImage, firstName, lastName }) => {
   return (
     <Box
@@ -16,9 +16,9 @@ const HeroSection = ({ backgroundImage, firstName, lastName }) => {
         justifyContent: 'center',
       }}
     >
-      <Typography 
-        variant="h4" 
-        component="h1" 
+      <Typography
+        variant="h4"
+        component="h1"
         sx={{ textShadow: '2px 2px 4px rgba(0,0,0,0.6)' }}
       >
         Hello {firstName} {lastName}

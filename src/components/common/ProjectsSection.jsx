@@ -2,17 +2,18 @@ import React from 'react'
 import { Box, Typography, Grid, CircularProgress, Alert, Button } from '@mui/material'
 import ProjectCard from '../project/ProjectCard'
 
-const ProjectsSection = ({ 
-  title, 
-  projects, 
-  loading, 
+//Project cards of both dashboards student and staff
+const ProjectsSection = ({
+  title,
+  projects,
+  loading,
   emptyMessage,
   maxItems = 3,
   onBrowseClick,
   buttonText = 'View Project'
 }) => {
   return (
-    <Box sx={{ mt: 6, width: '100%' }}>
+    <Box sx={{ mt: 6, width: '100%', px: { xs: 2, md: 0 } }}>
       <Typography variant="h5" sx={{ mb: 3, fontWeight: 'bold', textAlign: 'center' }}>
         {title}
       </Typography>
@@ -22,13 +23,13 @@ const ProjectsSection = ({
           <CircularProgress />
         </Box>
       ) : projects.length > 0 ? (
-        <Grid container spacing={3} justifyContent="center" sx={{ maxWidth: '1200px', mx: 'auto' }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3, maxWidth: 1100, mx: 'auto' }}>
           {projects.slice(0, maxItems).map((project) => (
-            <Grid item xs={12} sm={6} md={4} key={project.id || project.project_id}>
+            <Box key={project.id || project.project_id} sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
               <ProjectCard project={project} buttonText={buttonText} />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       ) : (
         <Alert severity="info" variant="outlined" sx={{ maxWidth: 600, mx: 'auto' }}>
           {emptyMessage}
@@ -37,7 +38,14 @@ const ProjectsSection = ({
 
       {projects.length > 0 && (
         <Box sx={{ mt: 3, textAlign: 'center' }}>
-          <Button onClick={onBrowseClick}>
+          <Button variant="outlined" sx={{
+            borderColor: '#2b4593', color: '#2b4593',
+            '&:hover': {
+              bgcolor: '#2b4593',
+              borderColor: '#2b4593',
+              color: 'white',
+            }
+          }} onClick={onBrowseClick}>
             Browse All Projects
           </Button>
         </Box>

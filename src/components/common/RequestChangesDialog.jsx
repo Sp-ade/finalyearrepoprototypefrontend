@@ -1,13 +1,13 @@
 import React from 'react'
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Typography, Button } from '@mui/material'
-
-const RequestChangesDialog = ({ 
-  open, 
-  onClose, 
-  value, 
-  onChange, 
-  onSubmit, 
-  loading 
+//projectvalidation requestchange popup box
+const RequestChangesDialog = ({
+  open,
+  onClose,
+  value,
+  onChange,
+  onSubmit,
+  loading
 }) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>

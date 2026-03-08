@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Card, CardContent, Typography, Stack, Chip } from '@mui/material'
 import { getStatusColor, formatDate } from '../../hooks/useRequestsList'
-
+//Request card for staffrequests and studentrequests
 const RequestCard = ({ request, onClick, showStudent = false }) => {
   return (
     <Card
@@ -15,7 +15,7 @@ const RequestCard = ({ request, onClick, showStudent = false }) => {
       }}
       onClick={onClick}
     >
-      <CardContent sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, alignItems: 'center' }}>
+      <CardContent sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', gap: { xs: 1, sm: 2 }, alignItems: { xs: 'flex-start', sm: 'center' } }}>
         <Box>
           <Typography variant="subtitle1" fontWeight={600}>
             {request.project_title || 'Untitled Project'}
@@ -39,6 +39,7 @@ const RequestCard = ({ request, onClick, showStudent = false }) => {
           color={getStatusColor(request.status)}
           variant="outlined"
           size="small"
+          sx={{ alignSelf: { xs: 'flex-start', sm: 'auto' } }}
         />
       </CardContent>
     </Card>

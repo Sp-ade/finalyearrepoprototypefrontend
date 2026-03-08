@@ -47,7 +47,7 @@ export const useStudentProjectForm = (editMode = false, editProjectId = null, ed
           const res = await fetch(`${API_URL}/api/projects/${editProjectId}`)
           const data = await res.json()
           const proj = data.project || data
-          
+
           setTitle(proj.title || '')
           setDescription(proj.description || '')
           setCategory(proj.category || '')
@@ -55,7 +55,7 @@ export const useStudentProjectForm = (editMode = false, editProjectId = null, ed
           setSelectedSupervisor(proj.supervisor_id || '')
           if (proj.Tags && proj.Tags.length > 0) setTags(proj.Tags.join(', '))
           if (proj.Studentnames && proj.Studentnames.length > 0) {
-            setRows(proj.Studentnames.map(n => ({ name: n, id: '' })))
+            setRows(proj.Studentnames.map((n, i) => ({ name: n, id: proj.StudentIDs?.[i] || '' })))
           }
 
           if (proj.artifacts && proj.artifacts.length > 0) {
@@ -175,6 +175,7 @@ export const useStudentProjectForm = (editMode = false, editProjectId = null, ed
 
     try {
       const studentNames = rows.map(r => r.name).filter(Boolean)
+      const studentIds = rows.map(r => r.id).filter(Boolean)
       const tagArray = tags.split(',').map(t => t.trim()).filter(Boolean)
       const attachments = await uploadFiles()
 
@@ -187,6 +188,7 @@ export const useStudentProjectForm = (editMode = false, editProjectId = null, ed
         supervisorId: selectedSupervisor,
         StudentCount: studentNames.length,
         Studentnames: studentNames,
+        StudentIDs: studentIds,
         Tags: tagArray,
         attachments: attachments,
         status: 'Pending',
@@ -213,7 +215,7 @@ export const useStudentProjectForm = (editMode = false, editProjectId = null, ed
           body: JSON.stringify(projectData)
         })
         if (!projectRes.ok) throw new Error('Failed to create project record')
-        
+
         const projectResult = await projectRes.json()
         const newProjectId = projectResult.project.id || projectResult.project.project_id
 

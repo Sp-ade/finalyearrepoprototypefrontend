@@ -1,31 +1,22 @@
 import React from 'react'
 import { Stack, TextField, Button, Box } from '@mui/material'
-
-const StudentListInput = ({ 
-  students, 
-  onAdd, 
-  onRemove, 
-  onChange 
+//this is the student name and ID adding part in the project creation page, the slot for adding student fields
+const StudentListInput = ({
+  students,
+  onAdd,
+  onRemove,
+  onChange
 }) => {
   return (
     <Box>
       {students.map((student, index) => (
-        <Stack 
-          key={index} 
-          direction="row" 
-          spacing={2} 
-          alignItems="center" 
+        <Stack
+          key={index}
+          direction="row"
+          spacing={2}
+          alignItems="center"
           sx={{ mb: 1 }}
         >
-          <TextField
-            label="Student name"
-            variant="outlined"
-            fullWidth
-            value={student.name}
-            onChange={(e) => onChange(index, 'name', e.target.value)}
-            placeholder="Enter student name"
-          />
-
           <TextField
             label="ID"
             variant="outlined"
@@ -35,7 +26,18 @@ const StudentListInput = ({
             placeholder="Student ID"
           />
 
-          <Button 
+          <TextField
+            label="Student name"
+            variant="outlined"
+            fullWidth
+            value={student.name}
+            onChange={(e) => onChange(index, 'name', e.target.value)}
+            placeholder="Enter student name"
+          />
+
+
+
+          <Button
             variant="outlined"
             onClick={onAdd}
             title="Add another student"

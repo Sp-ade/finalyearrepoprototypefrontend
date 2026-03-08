@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, Typography, Divider, TextField, Stack, Button } from '@mui/material';
 import { CheckCircle, AssignmentReturn } from '@mui/icons-material';
-
+//These are the inputs for when a supervisor wants validate a students submission
 const ReviewActionCard = ({
     grade, setGrade,
     remark, setRemark,

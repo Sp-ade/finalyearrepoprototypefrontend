@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, TextField, Stack, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material'
 
 const DEPARTMENTS = ['IT', 'Software eng.', 'computer sci.', 'cybersecurity']
-
+//the input fields for project creation except students and file upload
 const ProjectFormFields = ({
   // For Staff (Object based)
   projectData,

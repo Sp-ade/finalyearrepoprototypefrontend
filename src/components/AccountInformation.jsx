@@ -7,8 +7,10 @@ import SchoolIcon from '@mui/icons-material/School'
 import WorkIcon from '@mui/icons-material/Work'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import API_URL from '../config'
+import { useNavigate } from 'react-router-dom'
 
 const AccountInformation = () => {
+    const navigate = useNavigate()
     const [userData, setUserData] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -181,7 +183,14 @@ const AccountInformation = () => {
                     </Grid>
                 )}
                 <Grid item xs={12} sm={6}>
-                    <Button>Edit Account info</Button>
+                    <Button
+                        variant="contained"
+                        size="small"
+                        onClick={() => navigate('/edit-account')}
+                        sx={{ mt: 1, bgcolor: '#2b4593' }}
+                    >
+                        Change Password
+                    </Button>
                 </Grid>
             </Grid>
         </Paper>

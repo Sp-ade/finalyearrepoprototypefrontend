@@ -23,7 +23,10 @@ import AdminLogin from './components/AdminLogin'
 import StudentProjectCreate from './components/StudentProjectCreate'
 import StudentSubmissionList from './components/StudentSubmissionList'
 import StaffProjectValidation from './components/StaffProjectValidation'
-import NotFoundPage from './NotFoundPage.jsx'
+import EditAccount from './components/EditAccount'
+import NotFoundPage from './pages/NotFoundPage'
+import AssignStudentPage from './pages/AssignStudentPage'
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<MainLayout />}>
@@ -33,13 +36,13 @@ const router = createBrowserRouter(
       <Route path='signup' element={<Signup />} />
       <Route path='verifytest' element={<VerifyTest />} />
       <Route path='*' element={<NotFoundPage />} />
-      
+      <Route path='staffdashboard' element={<StaffDashboard />} />
 
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
         <Route path='staffbrowse' element={<StaffBrowse />} />
         <Route path='staff/project/:id' element={<StaffProjectView />} />
-        <Route path='staffdashboard' element={<StaffDashboard />} />
+
         <Route path='studentbrowse' element={<StudentBrowse />} />
         <Route path='project/:id' element={<ProjectView />} />
         <Route path='studentdashboard' element={<StudentDashboard />} />
@@ -49,6 +52,8 @@ const router = createBrowserRouter(
         <Route path='studentsubmit' element={<StudentProjectCreate />} />
         <Route path='staffprojectvalidation/:id' element={<StaffProjectValidation />} />
         <Route path='studentsubmissionlist' element={<StudentSubmissionList />} />
+        <Route path='edit-account' element={<EditAccount />} />
+        <Route path='assignstudent' element={<AssignStudentPage />} />
 
 
         {/* Admin Routes */}

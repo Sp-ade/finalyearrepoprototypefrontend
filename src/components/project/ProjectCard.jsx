@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Box, Typography, Button, Chip } from '@mui/material'
-
+//The card that repreents uploaded projects
 const Card = ({ project = { name: 'Project', title: 'Untitled', description: 'No description', supervisor: 'Unknown', StudentCount: 0, Studentnames: [], tags: [] }, buttonText = 'Manage Project' }) => {
   const navigate = useNavigate()
 
@@ -40,8 +40,8 @@ const Card = ({ project = { name: 'Project', title: 'Untitled', description: 'No
   }
 
   return (
-    <Box sx={{ width: '100%', maxWidth: '100%', border: '1px solid #e0e0e0', borderRadius: 1, overflow: 'hidden', height: 360 }}>
-      <Box sx={{ height: 180, bgcolor: '#f5f5f5', position: 'relative' }}>
+    <Box sx={{ width: '100%', maxWidth: '100%', border: '1px solid #e0e0e0', borderRadius: 1, overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ height: 180, bgcolor: '#f5f5f5', position: 'relative', flexShrink: 0 }}>
         <Box sx={{ width: '100%', height: '100%', bgcolor: '#ddd' }} />
         {/* Year Badge */}
         <Box
@@ -88,15 +88,16 @@ const Card = ({ project = { name: 'Project', title: 'Untitled', description: 'No
           </Box>
         )}
       </Box>
-      <Box sx={{ p: 2, height: 140, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Box sx={{ p: 2, flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 2 }}>
         <Box>
           <Typography variant="body2" sx={{ fontWeight: 'bold', mb: 0.5 }}>{title}</Typography>
-          <Typography variant="body2" sx={{ fontSize: '0.8rem', mb: 0.5 }}><strong>Description:</strong>{description}</Typography>
-          <Typography variant="body2" sx={{ fontSize: '0.85rem' }}><strong>Supervisor:</strong> {supervisor}</Typography>
+          <Typography variant="body2" sx={{ fontSize: '0.8rem', mb: 0.5 }}><strong>Description: </strong>{description}</Typography>
+          <Typography variant="body2" sx={{ fontSize: '0.85rem', mb: 0.5 }}><strong>Supervisor:</strong> {supervisor}</Typography>
           <Typography variant="body2" sx={{ fontSize: '0.85rem' }}><strong>Student(s):</strong> {studentNames}</Typography>
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button variant="contained" size="small" onClick={handleClick}>{buttonText}</Button>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 'auto' }}>
+          {/*Project card action button(View Project or Manage Project) */}
+          <Button variant="contained" size="small" onClick={handleClick} sx={{ bgcolor: '#2b4593' }}>{buttonText}</Button>
         </Box>
       </Box>
     </Box>

@@ -51,18 +51,31 @@ const ProjectView = () => {
     const canViewArtifacts = project.hasAccess || localStorage.getItem('role') !== 'student'
 
     return (
-        <Box sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', py: 4 }}>
-            <Container maxWidth="lg">
-                <Button onClick={() => navigate(-1)} sx={{ mb: 3 }}>
+        <Box sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', py: { xs: 2, sm: 4 } }}>
+            <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3 } }}>
+                <Button
+                    onClick={() => navigate(-1)}
+                    sx={{ mb: 2, textTransform: 'none', fontWeight: 600 }}
+                >
                     ← Go Back
                 </Button>
 
-                <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
+                <Paper elevation={3} sx={{ p: { xs: 2, sm: 4 }, borderRadius: 2 }}>
                     <Box sx={{ mb: 4 }}>
-                        <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 700, color: 'primary.main', mb: 2 }}>
+                        <Typography
+                            variant="h3"
+                            component="h1"
+                            gutterBottom
+                            sx={{
+                                fontWeight: 700,
+                                color: 'primary.main',
+                                mb: 1,
+                                fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' }
+                            }}
+                        >
                             {project.title}
                         </Typography>
-                        <Typography variant="h6" color="text.secondary" gutterBottom>
+                        <Typography variant="h6" color="text.secondary" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
                             {project.name}
                         </Typography>
                     </Box>
@@ -95,8 +108,14 @@ const ProjectView = () => {
                                 size="large"
                                 onClick={() => setOpenDialog(true)}
                                 sx={{
-                                    px: 6, py: 1.5, fontSize: '1.1rem', fontWeight: 600,
-                                    borderRadius: 2, textTransform: 'none', boxShadow: 3,
+                                    width: { xs: '100%', sm: 'auto' },
+                                    px: { xs: 3, sm: 6 },
+                                    py: 1.5,
+                                    fontSize: '1.1rem',
+                                    fontWeight: 600,
+                                    borderRadius: 2,
+                                    textTransform: 'none',
+                                    boxShadow: 3,
                                 }}
                             >
                                 Request Full View

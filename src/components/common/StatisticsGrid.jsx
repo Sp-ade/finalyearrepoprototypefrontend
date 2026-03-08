@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Card, CardContent, Typography } from '@mui/material'
-
+//statistic cards for dashboards 
 const StatisticsGrid = ({ stats }) => {
   return (
     <Grid container spacing={3} sx={{ mt: 2, justifyContent: 'center' }}>
@@ -11,8 +11,8 @@ const StatisticsGrid = ({ stats }) => {
               <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                 {stat.label}
               </Typography>
-              <Typography 
-                variant="h5" 
+              <Typography
+                variant="h5"
                 sx={{ color: stat.color || 'text.primary', fontWeight: 'bold' }}
               >
                 {stat.value}

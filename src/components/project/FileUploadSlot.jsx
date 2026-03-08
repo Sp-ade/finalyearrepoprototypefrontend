@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { CloudUpload } from '@mui/icons-material';
-
+//this is the slot where the fileupload places documents
 const FileUploadSlot = ({ index, file, existingFile, onFileChange, onClear }) => {
     const inputId = `project-file-${index}`;
 

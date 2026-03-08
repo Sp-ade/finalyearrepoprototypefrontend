@@ -42,11 +42,11 @@ const RequestList = () => {
             </Box>
         )
     }
-//staff requests
+    //staff requests
     return (
-        <Box sx={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2, backgroundColor: 'background.default' }}>
+        <Box sx={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', p: { xs: 1, sm: 2 }, backgroundColor: 'background.default' }}>
             <Card sx={{ width: 'min(900px, 95%)', borderRadius: 2 }}>
-                <CardContent>
+                <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
                     <Typography variant="h5" component="div" gutterBottom>
                         Student Requests
                     </Typography>

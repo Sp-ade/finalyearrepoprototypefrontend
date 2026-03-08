@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack, TextField, Button } from '@mui/material';
-
+//student input part from all project creations
 const ParticipantTable = ({ rows, onChange, onAdd, onRemove }) => {
     return (
         <>

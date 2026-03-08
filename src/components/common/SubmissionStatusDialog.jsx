@@ -1,13 +1,13 @@
 import React from 'react'
 import { Dialog, DialogTitle, DialogContent, DialogActions, Box, Button, CircularProgress, Alert, Typography, Stack } from '@mui/material'
 import StatusChip from './StatusChip'
-
-const SubmissionStatusDialog = ({ 
-  open, 
-  onClose, 
-  loading, 
-  status, 
-  onEditSubmit 
+//student check submission status popup box
+const SubmissionStatusDialog = ({
+  open,
+  onClose,
+  loading,
+  status,
+  onEditSubmit
 }) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -21,10 +21,16 @@ const SubmissionStatusDialog = ({
           <Alert severity="error">{status.error}</Alert>
         ) : !status?.submitted ? (
           <Box textAlign="center" py={2}>
-            <Typography gutterBottom>You have not submitted a project yet.</Typography>
-            <Button variant="contained" onClick={() => window.location.href = '/studentsubmit'}>
-              Propose Project
-            </Button>
+            {status?.role === 'member' ? (
+              <Typography gutterBottom>Your leader has not yet submitted.</Typography>
+            ) : (
+              <>
+                <Typography gutterBottom>You have not submitted a project yet.</Typography>
+                <Button variant="contained" onClick={() => window.location.href = '/studentsubmit'}>
+                  Submit Project
+                </Button>
+              </>
+            )}
           </Box>
         ) : (
           <Box>
@@ -48,14 +54,20 @@ const SubmissionStatusDialog = ({
                   <strong>Supervisor Feedback:</strong><br />
                   {status.submission.supervisor_response || 'No feedback provided.'}
                 </Alert>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  onClick={() => onEditSubmit(status.submission)}
-                >
-                  Edit & Resubmit
-                </Button>
+                {status.role === 'leader' || !status.role || status.role !== 'member' ? (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    onClick={() => onEditSubmit(status.submission)}
+                  >
+                    Edit & Resubmit
+                  </Button>
+                ) : (
+                  <Typography color="text.secondary" variant="body2" sx={{ mt: 1 }}>
+                    Your leader must edit and resubmit the project based on this feedback.
+                  </Typography>
+                )}
               </Box>
             )}
 

@@ -1,17 +1,38 @@
+import React, { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { AppBar, Toolbar, Box, Button } from '@mui/material'
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  Button,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  useMediaQuery,
+  useTheme
+} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
 import Logo from '../assets/Nile-University-of-Nigeria.jpg'
+
 const Navbar = () => {
   const navigate = useNavigate()
-  const location = useLocation() // Forces re-render on route change
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const token = localStorage.getItem('token')
-  const role = localStorage.getItem('role') // Get user role from localStorage
+  const role = localStorage.getItem('role')
 
-  // Determine dashboard and browse routes based on role
   const dashboardRoute = role === 'admin' ? '/admindashboard' : role === 'supervisor' ? '/staffdashboard' : '/studentdashboard'
   const browseRoute = role === 'supervisor' ? '/staffbrowse' : '/studentbrowse'
   const requestsRoute = role === 'supervisor' ? '/requests' : '/studentrequests'
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
 
   const handleLogout = () => {
     localStorage.removeItem('token')
@@ -19,43 +40,155 @@ const Navbar = () => {
     localStorage.removeItem('role')
     localStorage.removeItem('userId')
     localStorage.removeItem('userName')
+    setMobileOpen(false)
     navigate('/login')
   }
 
-  return (
-    <AppBar position="static" color="transparent" elevation={0}>
-      <Toolbar sx={{ display: 'flex', alignItems: 'center' }}>
+  const navLinks = [
+    { title: 'Contacts', path: '#' },
+    { title: 'Dashboard', path: dashboardRoute },
+    ...(role !== 'admin' ? [
+      { title: 'Projects', path: browseRoute },
+      { title: 'Requests', path: requestsRoute }
+    ] : []),
+    ...(role === 'supervisor' ? [
+      { title: 'Assign Leader', path: '/assignstudent' }
+    ] : []),
+    ...(role === 'admin' ? [
+      { title: 'Users', path: '/admin/users' },
+      { title: 'Tags', path: '/admin/tags' }
+    ] : []),
+    { title: 'FAQS', path: '#' }
+  ]
+
+  const drawer = (
+    <Box sx={{ width: '100%', pt: 2, pb: 2 }} onClick={handleDrawerToggle} role="presentation">
+      <Box sx={{ px: 2, pb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Box
           component="img"
           src={Logo}
           alt="logo"
-          sx={{ width: 88, height: 88, bgcolor: '#f0f0f0', borderRadius: 1 }}
+          sx={{ width: 60, height: 60, borderRadius: 1 }}
         />
-
-        <Box sx={{ ml: 'auto', display: 'flex', gap: 2 }}>
-          <Button color="black" variant="text">Contacts</Button>
-          <Button component={Link} to={dashboardRoute} color="black" variant="text">Dashboard</Button>
-          {role !== 'admin' && (
-            <>
-              <Button component={Link} to={browseRoute} color="black" variant="text">Projects</Button>
-              <Button component={Link} to={requestsRoute} color="black" variant="text">Requests</Button>
-            </>
-          )}
-          {role === 'admin' && (
-            <>
-              <Button component={Link} to="/admin/users" color="black" variant="text">Users</Button>
-              <Button component={Link} to="/admin/tags" color="black" variant="text">Tags</Button>
-            </>
-          )}
-          <Button color="black" variant="text">FAQS</Button>
-
+        <IconButton onClick={handleDrawerToggle}>
+          <MenuIcon />
+        </IconButton>
+      </Box>
+      <List>
+        {navLinks.map((link) => (
+          <ListItem key={link.title} disablePadding>
+            <ListItemButton
+              component={Link}
+              to={link.path}
+              sx={{
+                py: 1.5,
+                '&:active': {
+                  bgcolor: '#4caf50 !important',
+                  color: 'white'
+                },
+                '&.Mui-selected': {
+                  bgcolor: '#4caf50 !important',
+                  color: 'white'
+                }
+              }}
+            >
+              <ListItemText
+                primary={link.title}
+                primaryTypographyProps={{ fontWeight: 500, sx: { px: 2 } }}
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+        <ListItem disablePadding>
           {token ? (
-            <Button onClick={handleLogout} color="black" variant="text">Log out</Button>
+            <ListItemButton
+              onClick={handleLogout}
+              sx={{
+                py: 1.5,
+                '&:active': {
+                  bgcolor: '#4caf50 !important',
+                  color: 'white'
+                }
+              }}
+            >
+              <ListItemText primary="Log out" sx={{ color: 'error.main', px: 2 }} />
+            </ListItemButton>
           ) : (
-            <Button component={Link} to="/login" color="black" variant="text">log in</Button>
+            <ListItemButton
+              component={Link}
+              to="/login"
+              sx={{
+                py: 1.5,
+                '&:active': {
+                  bgcolor: '#4caf50 !important',
+                  color: 'white'
+                }
+              }}
+            >
+              <ListItemText primary="Log in" sx={{ px: 2 }} />
+            </ListItemButton>
           )}
+        </ListItem>
+      </List>
+    </Box>
+  )
+
+  return (
+    <AppBar position="static" color="transparent" elevation={0}>
+      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Box
+          component={Link}
+          to="/"
+          sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
+        >
+          <Box
+            component="img"
+            src={Logo}
+            alt="logo"
+            sx={{ width: { xs: 60, md: 80 }, height: { xs: 60, md: 80 }, bgcolor: '#f0f0f0', borderRadius: 1 }}
+          />
         </Box>
+
+        {isMobile ? (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ ml: 2, color: 'black' }}
+          >
+            <MenuIcon />
+          </IconButton>
+        ) : (
+          <Box sx={{ ml: 'auto', display: 'flex', gap: 2 }}>
+            {navLinks.map((link) => (
+              <Button key={link.title} component={Link} to={link.path} color="black" variant="text">
+                {link.title}
+              </Button>
+            ))}
+            {token ? (
+              <Button onClick={handleLogout} color="black" variant="text">Log out</Button>
+            ) : (
+              <Button component={Link} to="/login" color="black" variant="text">log in</Button>
+            )}
+          </Box>
+        )}
       </Toolbar>
+
+      <Drawer
+        anchor="top"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{ keepMounted: true }}
+        PaperProps={{
+          sx: {
+            borderRadius: '0 0 20px 20px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+          }
+        }}
+      >
+        {drawer}
+      </Drawer>
     </AppBar>
   )
 }

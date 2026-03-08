@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect, useRef } from 'react'
 import { Box, TextField, FormControl, InputLabel, Select, MenuItem, Grid, Typography, Button, Chip, Stack } from '@mui/material'
 import PageHeader from './common/PageHeader'
+import TagFilterDialog from './common/TagFilterDialog'
 import heroImage from '../assets/scott-unsplash.jpg'
 import Card from './project/ProjectCard'
 import API_URL from '../config'
@@ -16,6 +17,7 @@ const StudentBrowse = () => {
   const [selectedTags, setSelectedTags] = useState([])
   const [projects, setProjects] = useState([])
   const projectsRef = useRef(null)
+  const [isTagDialogOpen, setIsTagDialogOpen] = useState(false)
 
   useEffect(() => {
     fetch(`${API_URL}/api/projects`)
@@ -96,11 +98,11 @@ const StudentBrowse = () => {
   return (
     <Box>
       <Box sx={{
-        height: 400, width: '100vw', position: 'relative', left: '50%',
+        height: { xs: 300, sm: 400 }, width: '100vw', position: 'relative', left: '50%',
         right: '50%', marginLeft: '-50vw', marginRight: '-50vw', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'
       }}>
         {/* search bar at the start of the page */}
-        <Box sx={{ mb: 3, width: '80%' }}>
+        <Box sx={{ mb: 3, width: { xs: '90%', sm: '80%' } }}>
           <form onSubmit={handleSearchSubmit}>
             <TextField
               fullWidth
@@ -131,8 +133,8 @@ const StudentBrowse = () => {
           <PageHeader title="All Projects" showBack={false} />
 
           {/* Filter dropdowns */}
-          <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
-            <FormControl sx={{ minWidth: 160 }} size="small">
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 2 }}>
+            <FormControl sx={{ minWidth: { xs: '100%', sm: 160 } }} size="small">
               <InputLabel id="department-label">Department</InputLabel>
               <Select
                 labelId="department-label"
@@ -146,7 +148,7 @@ const StudentBrowse = () => {
               </Select>
             </FormControl>
 
-            <FormControl sx={{ minWidth: 160 }} size="small">
+            <FormControl sx={{ minWidth: { xs: '100%', sm: 160 } }} size="small">
               <InputLabel id="year-label">Year</InputLabel>
               <Select
                 labelId="year-label"
@@ -160,7 +162,7 @@ const StudentBrowse = () => {
               </Select>
             </FormControl>
 
-            <FormControl sx={{ minWidth: 200 }} size="small">
+            <FormControl sx={{ minWidth: { xs: '100%', sm: 200 } }} size="small">
               <InputLabel id="supervisor-label">Supervisor</InputLabel>
               <Select
                 labelId="supervisor-label"
@@ -175,35 +177,22 @@ const StudentBrowse = () => {
             </FormControl>
           </Stack>
 
-          {/* Tag selection */}
+          {/* Tag selection button */}
           {allTags.length > 0 && (
-            <Box sx={{ mb: 2 }}>
-              <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
-                Filter by Tags:
-              </Typography>
-              <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                {allTags.map(tag => (
-                  <Chip
-                    key={tag}
-                    label={tag}
-                    onClick={() => handleTagClick(tag)}
-                    sx={{
-                      cursor: 'pointer',
-                      opacity: selectedTags.includes(tag) ? 0.5 : 1,
-                      '&:hover': {
-                        bgcolor: 'primary.light',
-                      }
-                    }}
-                    disabled={selectedTags.includes(tag)}
-                  />
-                ))}
-              </Stack>
+            <Box sx={{ mt: 1, mb: 2 }}>
+              <Button
+                variant="outlined"
+                onClick={() => setIsTagDialogOpen(true)}
+                sx={{ borderRadius: 2 }}
+              >
+                Filter by Tags {selectedTags.length > 0 && `(${selectedTags.length})`}
+              </Button>
             </Box>
           )}
 
-          {/* Selected tags */}
+          {/* Selected tags display */}
           {selectedTags.length > 0 && (
-            <Box>
+            <Box sx={{ mb: 2 }}>
               <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 600 }}>
                 Selected Tags:
               </Typography>
@@ -221,10 +210,19 @@ const StudentBrowse = () => {
           )}
         </Box>
 
+        {/* Tag Filter Dialog */}
+        <TagFilterDialog
+          open={isTagDialogOpen}
+          onClose={() => setIsTagDialogOpen(false)}
+          allTags={allTags}
+          selectedTags={selectedTags}
+          onTagClick={handleTagClick}
+        />
+
         {/* project cards grid (forced two columns) */}
-        <Box ref={projectsRef} sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 3, maxWidth: 1100, mx: 'auto' }}>
+        <Box ref={projectsRef} sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3, maxWidth: 1100, mx: 'auto' }}>
           {filtered.map(p => (
-            <Box key={p.id} sx={{ width: '100%' }}>
+            <Box key={p.id} sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
               <Card project={p} buttonText="View Project" />
             </Box>
           ))}

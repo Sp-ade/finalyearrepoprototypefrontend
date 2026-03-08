@@ -63,6 +63,7 @@ const StudentDashboard = () => {
           variant="contained"
           color="primary"
           size="large"
+          sx={{ bgcolor: '#2b4593' }}
           onClick={() => navigate('/studentbrowse')}
         >
           Explore Projects
@@ -71,6 +72,14 @@ const StudentDashboard = () => {
           variant="outlined"
           color="primary"
           size="large"
+          sx={{
+            borderColor: '#2b4593', color: '#2b4593',
+            '&:hover': {
+              bgcolor: '#2b4593',
+              borderColor: '#2b4593',
+              color: 'white',
+            }
+          }}
           onClick={() => navigate('/studentrequests')}
         >
           My Requests
@@ -79,6 +88,7 @@ const StudentDashboard = () => {
           variant="contained"
           color="secondary"
           size="large"
+          sx={{ bgcolor: '#49f663ff' }}
           onClick={handleCheckStatus}
         >
           Check Submission Status
@@ -87,10 +97,10 @@ const StudentDashboard = () => {
 
       {/* Approved Projects Section */}
       <ProjectsSection
-        title="Your Approved Projects"
+        title="Approved Projects"
         projects={approvedProjects}
         loading={loading}
-        emptyMessage="You don't have any approved projects yet."
+        emptyMessage="You don't have full access to any projects yet."
         maxItems={3}
         onBrowseClick={() => navigate('/studentbrowse')}
         buttonText="View Project"

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Stack, Chip } from '@mui/material'
-
-const StatusFilter = ({ 
-  options, 
-  selected, 
-  onChange 
+//status filter for studentsubmissionList
+const StatusFilter = ({
+  options,
+  selected,
+  onChange
 }) => {
   return (
     <Stack direction="row" spacing={1} sx={{ mb: 3 }}>

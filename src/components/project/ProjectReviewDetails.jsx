@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Stack, Chip, Button } from '@mui/material';
 import { Download } from '@mui/icons-material';
-
+//this is the file that is displayed which a student clicks to view said file.
 const ProjectReviewDetails = ({ project }) => {
     return (
         <>

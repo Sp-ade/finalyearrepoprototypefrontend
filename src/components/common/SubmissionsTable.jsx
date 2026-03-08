@@ -12,9 +12,10 @@ import {
   Box
 } from '@mui/material'
 
-const SubmissionsTable = ({ 
-  submissions, 
-  getStatusColor, 
+//table for studentsubmissionList
+const SubmissionsTable = ({
+  submissions,
+  getStatusColor,
   onReview,
   emptyMessage = 'No submissions found for this filter.'
 }) => {
