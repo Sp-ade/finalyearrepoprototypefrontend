@@ -3,14 +3,14 @@ import { Box, Paper, Button, Stack, Typography, Snackbar, Alert } from '@mui/mat
 import { useNavigate } from 'react-router-dom'
 import { ArrowBack } from '@mui/icons-material'
 import { useProjectForm } from '../hooks/useProjectForm'
-import StudentListInput from './project/StudentListInput'
+import ParticipantTable from './project/ParticipantTable'
 import ProjectFormFields from './project/ProjectFormFields'
 import FileUploadField from './project/FileUploadField'
 
 const ProjectCreate = () => {
   const navigate = useNavigate()
   const [showSuccess, setShowSuccess] = useState(false)
-  
+
   const {
     projectData,
     updateField,
@@ -49,7 +49,7 @@ const ProjectCreate = () => {
         >
           Return
         </Button>
-        
+
         <Typography variant="h6" sx={{ mb: 3 }}>
           Project Creation
         </Typography>
@@ -59,7 +59,7 @@ const ProjectCreate = () => {
           <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600 }}>
             Students
           </Typography>
-          <StudentListInput
+          <ParticipantTable
             students={students}
             onAdd={addStudent}
             onRemove={removeStudent}
@@ -95,10 +95,10 @@ const ProjectCreate = () => {
 
         {/* Submit Button */}
         <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
-          <Button 
-            variant="contained" 
-            color="success" 
-            onClick={handleSubmit} 
+          <Button
+            variant="contained"
+            color="success"
+            onClick={handleSubmit}
             disabled={loading}
           >
             {loading ? 'Saving...' : 'Submit'}

@@ -56,6 +56,7 @@ const ProjectFormFields = ({
         fullWidth
         placeholder="Enter project title"
         required
+        InputLabelProps={{ shrink: true }}
       />
 
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -65,9 +66,10 @@ const ProjectFormFields = ({
           onChange={handleChange('academicYear')}
           sx={{ width: { sm: 200 } }}
           placeholder={new Date().getFullYear().toString()}
+          InputLabelProps={{ shrink: true }}
         />
 
-        <FormControl sx={{ minWidth: 200 }} size="small">
+        <FormControl sx={{ minWidth: 200 }}>
           <InputLabel id="department-label">Department</InputLabel>
           <Select
             labelId="department-label"
@@ -83,7 +85,7 @@ const ProjectFormFields = ({
 
         {/* Supervisor Selection (For Students) */}
         {!projectData && supervisors.length > 0 && (
-          <FormControl sx={{ minWidth: 200 }} size="small" required>
+          <FormControl sx={{ minWidth: 200 }} required>
             <InputLabel id="supervisor-label">Assign Supervisor</InputLabel>
             <Select
               labelId="supervisor-label"
@@ -107,6 +109,7 @@ const ProjectFormFields = ({
             onChange={handleChange('grade')}
             sx={{ width: 160 }}
             placeholder="A, B, C, etc."
+            InputLabelProps={{ shrink: true }}
           />
         )}
       </Stack>
@@ -120,6 +123,7 @@ const ProjectFormFields = ({
         fullWidth
         placeholder="Enter project description"
         required
+        InputLabelProps={{ shrink: true }}
       />
 
       {projectData && (
@@ -131,6 +135,7 @@ const ProjectFormFields = ({
           rows={2}
           fullWidth
           placeholder="Evaluation remarks and feedback"
+          InputLabelProps={{ shrink: true }}
         />
       )}
 
@@ -141,6 +146,7 @@ const ProjectFormFields = ({
         onChange={handleChange('tags')}
         fullWidth
         helperText="Separate tags with commas"
+        InputLabelProps={{ shrink: true }}
       />
 
       {supervisor && (

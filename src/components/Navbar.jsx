@@ -44,14 +44,6 @@ const Navbar = () => {
     navigate('/login')
   }
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleMenuClose = () => {
-    setAnchorEl(null)
-  }
-
   const navLinks = [
     { title: 'Contacts', path: '#' },
     { title: 'Dashboard', path: dashboardRoute },
@@ -69,71 +61,24 @@ const Navbar = () => {
     { title: 'FAQS', path: '#' }
   ]
 
-  const drawer = (
-    <Box sx={{ width: '100%', pt: 2, pb: 2 }} onClick={handleDrawerToggle} role="presentation">
-      <Box sx={{ px: 2, pb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Box
-          component="img"
-          src={Logo}
-          alt="logo"
-          sx={{ width: 60, height: 60, borderRadius: 1 }}
-        />
-        <IconButton onClick={handleDrawerToggle}>
-          <MenuIcon />
-        </IconButton>
-      </Box>
+  const drawerContent = (
+    <Box sx={{ width: '100%', py: 2 }} onClick={handleDrawerToggle} role="presentation">
       <List>
         {navLinks.map((link) => (
           <ListItem key={link.title} disablePadding>
-            <ListItemButton
-              component={Link}
-              to={link.path}
-              sx={{
-                py: 1.5,
-                '&:active': {
-                  bgcolor: '#4caf50 !important',
-                  color: 'white'
-                },
-                '&.Mui-selected': {
-                  bgcolor: '#4caf50 !important',
-                  color: 'white'
-                }
-              }}
-            >
-              <ListItemText
-                primary={link.title}
-                primaryTypographyProps={{ fontWeight: 500, sx: { px: 2 } }}
-              />
+            <ListItemButton component={Link} to={link.path}>
+              <ListItemText primary={link.title} />
             </ListItemButton>
           </ListItem>
         ))}
         <ListItem disablePadding>
           {token ? (
-            <ListItemButton
-              onClick={handleLogout}
-              sx={{
-                py: 1.5,
-                '&:active': {
-                  bgcolor: '#4caf50 !important',
-                  color: 'white'
-                }
-              }}
-            >
-              <ListItemText primary="Log out" sx={{ color: 'error.main', px: 2 }} />
+            <ListItemButton onClick={handleLogout}>
+              <ListItemText primary="Log out" sx={{ color: 'error.main' }} />
             </ListItemButton>
           ) : (
-            <ListItemButton
-              component={Link}
-              to="/login"
-              sx={{
-                py: 1.5,
-                '&:active': {
-                  bgcolor: '#4caf50 !important',
-                  color: 'white'
-                }
-              }}
-            >
-              <ListItemText primary="Log in" sx={{ px: 2 }} />
+            <ListItemButton component={Link} to="/login">
+              <ListItemText primary="Log in" />
             </ListItemButton>
           )}
         </ListItem>
@@ -142,46 +87,58 @@ const Navbar = () => {
   )
 
   return (
-    <AppBar position="static" color="transparent" elevation={0}>
-      <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Box
-          component={Link}
-          to="/"
-          sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
-        >
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" color="transparent" elevation={0} sx={{ borderBottom: '1px solid #e0e0e0' }}>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Box
-            component="img"
-            src={Logo}
-            alt="logo"
-            sx={{ width: { xs: 60, md: 80 }, height: { xs: 60, md: 80 }, bgcolor: '#f0f0f0', borderRadius: 1 }}
-          />
-        </Box>
-
-        {isMobile ? (
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ ml: 2, color: 'black' }}
+            component={Link}
+            to="/"
+            sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
           >
-            <MenuIcon />
-          </IconButton>
-        ) : (
-          <Box sx={{ ml: 'auto', display: 'flex', gap: 2 }}>
-            {navLinks.map((link) => (
-              <Button key={link.title} component={Link} to={link.path} color="black" variant="text">
-                {link.title}
-              </Button>
-            ))}
-            {token ? (
-              <Button onClick={handleLogout} color="black" variant="text">Log out</Button>
-            ) : (
-              <Button component={Link} to="/login" color="black" variant="text">log in</Button>
-            )}
+            <Box
+              component="img"
+              src={Logo}
+              alt="logo"
+              sx={{ width: 60, height: 60, borderRadius: 1 }}
+            />
           </Box>
-        )}
-      </Toolbar>
+
+          {isMobile ? (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ color: 'black' }}
+            >
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              {navLinks.map((link) => (
+                <Button
+                  key={link.title}
+                  component={Link}
+                  to={link.path}
+                  color="inherit"
+                  sx={{ color: 'black', textTransform: 'capitalize' }}
+                >
+                  {link.title}
+                </Button>
+              ))}
+              {token ? (
+                <Button onClick={handleLogout} color="error" variant="text" sx={{ textTransform: 'capitalize' }}>
+                  Log out
+                </Button>
+              ) : (
+                <Button component={Link} to="/login" color="black" variant="text" sx={{ textTransform: 'capitalize' }}>
+                  Log in
+                </Button>
+              )}
+            </Box>
+          )}
+        </Toolbar>
+      </AppBar>
 
       <Drawer
         anchor="top"
@@ -195,9 +152,9 @@ const Navbar = () => {
           }
         }}
       >
-        {drawer}
+        {drawerContent}
       </Drawer>
-    </AppBar>
+    </Box>
   )
 }
 

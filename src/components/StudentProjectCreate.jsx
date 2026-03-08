@@ -58,7 +58,7 @@ const StudentProjectCreate = () => {
         />
 
         <ParticipantTable
-          rows={rows}
+          students={rows}
           onChange={handleStudentChange}
           onAdd={handleAddStudent}
           onRemove={handleRemoveStudent}
