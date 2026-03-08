@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 import { Container, Box, Paper, Typography, TextField, Button, MenuItem, Alert } from '@mui/material'
-import API_URL from '../config'
+import API_URL from '../../config'
 
 const Signup = () => {
     const [searchParams] = useSearchParams()
