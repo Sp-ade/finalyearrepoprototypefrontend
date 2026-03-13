@@ -24,7 +24,7 @@ export const useProjectView = (projectId) => {
 
         if (role === 'student' && email && data.StudentIDs && data.StudentIDs.length > 0) {
           try {
-            const meRes = await fetch(`${API_URL}/api/auth/me?email=${encodeURIComponent(email)}`)
+            const meRes = await fetch(`${API_URL}/api/me?email=${encodeURIComponent(email)}`)
             if (meRes.ok) {
               const meData = await meRes.json()
               const matricNo = meData.matricNo
