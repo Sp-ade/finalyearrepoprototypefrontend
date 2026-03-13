@@ -123,7 +123,7 @@ const AdminDashboard = () => {
                 <Grid container spacing={3}>
                     {/* User Breakdown */}
                     <Grid item xs={12} md={4}>
-                        <Paper sx={{ p: 3, height: '80%' }}>
+                        <Paper sx={{ p: 3, height: '100%' }}>
                             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
                                 User Breakdown
                             </Typography>
@@ -154,7 +154,7 @@ const AdminDashboard = () => {
 
                     {/* Project Breakdown */}
                     <Grid item xs={12} md={4}>
-                        <Paper sx={{ p: 3, height: '80%' }}>
+                        <Paper sx={{ p: 3, height: '100%' }}>
                             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
                                 Project Status
                             </Typography>
@@ -179,7 +179,7 @@ const AdminDashboard = () => {
 
                     {/* Request Breakdown */}
                     <Grid item xs={12} md={4}>
-                        <Paper sx={{ p: 3, height: '80%' }}>
+                        <Paper sx={{ p: 3, height: '100%' }}>
                             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
                                 Request Status
                             </Typography>

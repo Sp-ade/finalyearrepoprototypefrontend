@@ -134,7 +134,12 @@ const UserManagement = () => {
 
                 {/* Statistics */}
                 {stats && (
-                    <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
+                    <Stack
+                        direction={{ xs: 'column', sm: 'row' }}
+                        spacing={2}
+                        sx={{ mb: 3 }}
+                        flexWrap="wrap"
+                    >
                         <Chip label={`Total: ${stats.total_users}`} color="default" />
                         <Chip label={`Students: ${stats.total_students}`} color="primary" />
                         <Chip label={`Supervisors: ${stats.total_supervisors}`} color="success" />
@@ -144,7 +149,7 @@ const UserManagement = () => {
 
                 {/* Filters */}
                 <Paper sx={{ p: 3, mb: 3 }}>
-                    <Stack direction="row" spacing={2}>
+                    <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                         <TextField
                             label="Search by name or email"
                             variant="outlined"
@@ -152,7 +157,7 @@ const UserManagement = () => {
                             onChange={(e) => setSearch(e.target.value)}
                             sx={{ flex: 1 }}
                         />
-                        <FormControl sx={{ minWidth: 200 }}>
+                        <FormControl sx={{ minWidth: { xs: '100%', sm: 200 } }}>
                             <InputLabel>Filter by Role</InputLabel>
                             <Select
                                 value={roleFilter}

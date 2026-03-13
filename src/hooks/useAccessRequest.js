@@ -6,7 +6,7 @@ export const useAccessRequest = () => {
   const [reason, setReason] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  const submitRequest = async (projectId) => {
+  const submitRequest = async (projectId, mode = 'view') => {
     const studentId = localStorage.getItem('userId')
     const userRole = localStorage.getItem('role')
 
@@ -33,13 +33,14 @@ export const useAccessRequest = () => {
         body: JSON.stringify({
           studentId,
           projectId,
-          reason
+          reason,
+          mode
         }),
       })
 
       const data = await response.json()
       if (response.ok) {
-        alert('Request submitted successfully!')
+        alert(`${mode === 'edit' ? 'Edit' : 'Access'} request submitted successfully!`)
         setOpenDialog(false)
         setReason('')
         return true

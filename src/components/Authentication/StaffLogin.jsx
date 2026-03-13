@@ -4,7 +4,7 @@ import {
   Box, Paper, Typography, TextField, Button,
   Checkbox, FormControlLabel, CircularProgress, Alert
 } from '@mui/material';
-import logo from '../assets/Nile-University-of-Nigeria.jpg';
+import logo from '../../assets/Nile-University-of-Nigeria.jpg';
 import API_URL from '../../config';
 
 const StaffLogin = ({ onSwitch, onSetType }) => {

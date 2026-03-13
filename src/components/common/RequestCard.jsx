@@ -34,13 +34,20 @@ const RequestCard = ({ request, onClick, showStudent = false }) => {
           </Typography>
         </Box>
 
-        <Chip
-          label={request.status}
-          color={getStatusColor(request.status)}
-          variant="outlined"
-          size="small"
-          sx={{ alignSelf: { xs: 'flex-start', sm: 'auto' } }}
-        />
+        <Stack direction="row" spacing={1} sx={{ alignSelf: { xs: 'flex-start', sm: 'auto' } }}>
+          <Chip
+            label={request.mode === 'edit' ? 'EDIT' : 'VIEW'}
+            color={request.mode === 'edit' ? 'warning' : 'info'}
+            size="small"
+            sx={{ fontWeight: 700, fontSize: '0.65rem' }}
+          />
+          <Chip
+            label={request.status}
+            color={getStatusColor(request.status)}
+            variant="outlined"
+            size="small"
+          />
+        </Stack>
       </CardContent>
     </Card>
   )

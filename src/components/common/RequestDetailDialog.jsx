@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Grid, Typography, Chip, TextField, Box, Alert, Divider } from '@mui/material'
 import { getStatusColor, formatDate } from '../../hooks/useRequestsList'
-//requestlist cards for staff and student for access of project views
+//sent requestlist card for student for access of project views
 const RequestDetailDialog = ({
   open,
   onClose,
@@ -48,18 +48,26 @@ const RequestDetailDialog = ({
               </Grid>
 
               <Grid item xs={12} sm={6}>
+                <Typography variant="subtitle2" color="text.secondary">Request Type</Typography>
+                <Chip
+                  label={request.mode === 'edit' ? 'Edit Request' : 'View Access'}
+                  color={request.mode === 'edit' ? 'warning' : 'info'}
+                  size="small"
+                  sx={{ fontWeight: 600 }}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
                 <Typography variant="subtitle2" color="text.secondary">
                   {isStudent ? 'Date Sent' : 'Date Received'}
                 </Typography>
                 <Typography>{formatDate(request.requested_at)}</Typography>
               </Grid>
 
-              {!isStudent && (
-                <Grid item xs={12}>
-                  <Typography variant="subtitle2" color="text.secondary">Supervisor</Typography>
-                  <Typography>{request.supervisor_name}</Typography>
-                </Grid>
-              )}
+              <Grid item xs={12}>
+                <Typography variant="subtitle2" color="text.secondary">Supervisor</Typography>
+                <Typography>{request.supervisor_name}</Typography>
+              </Grid>
 
               <Grid item xs={12}>
                 <Typography variant="subtitle2" color="text.secondary">

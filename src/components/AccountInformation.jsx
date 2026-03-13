@@ -186,7 +186,7 @@ const AccountInformation = () => {
                     <Button
                         variant="contained"
                         size="small"
-                        onClick={() => navigate('/edit-account')}
+                        onClick={() => navigate('/change-password')}
                         sx={{ mt: 1, bgcolor: '#2b4593' }}
                     >
                         Change Password

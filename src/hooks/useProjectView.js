@@ -30,6 +30,8 @@ export const useProjectView = (projectId) => {
               const matricNo = meData.matricNo
               if (matricNo && data.StudentIDs.includes(matricNo)) {
                 data.hasAccess = true
+                data.userProjectRole = meData.role // 'leader' or 'member' from Students table
+                data.isProjectLeader = meData.role === 'leader'
               }
             }
           } catch (err) {

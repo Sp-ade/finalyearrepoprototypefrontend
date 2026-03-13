@@ -179,6 +179,14 @@ const StaffProjectView = () => {
                     <Divider sx={{ mb: 4 }} />
 
                     <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+                        <Button
+                            variant="contained"
+                            color="info"
+                            onClick={() => navigate(`/staff/project/edit/${project.id || project.project_id}`)}
+                            sx={{ minWidth: 120 }}
+                        >
+                            Edit
+                        </Button>
                         <ProjectDelete
                             projectId={project.id || project.project_id}
                             projectTitle={project.title}

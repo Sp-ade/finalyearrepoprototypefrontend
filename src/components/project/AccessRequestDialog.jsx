@@ -6,14 +6,19 @@ import {
 //Dialog box when student requests access to a project
 const AccessRequestDialog = ({
     open, onClose, onSubmit,
-    reason, setReason, projectTitle, loading
+    reason, setReason, projectTitle, loading, mode = 'view'
 }) => {
+    const isEdit = mode === 'edit';
+
     return (
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-            <DialogTitle>Request Full Access</DialogTitle>
+            <DialogTitle>{isEdit ? 'Request Project Edit Access' : 'Request Full Access'}</DialogTitle>
             <DialogContent>
                 <DialogContentText sx={{ mb: 2 }}>
-                    Please explain why you are requesting access to <strong>{projectTitle}</strong>.
+                    {isEdit 
+                        ? `Please explain what changes you need to make to `
+                        : `Please explain why you are requesting access to `}
+                    <strong>{projectTitle}</strong>.
                     This will be sent to the supervisor for approval.
                 </DialogContentText>
                 <TextField

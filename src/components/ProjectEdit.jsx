@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Box, Paper, Button, Stack, Typography, Snackbar, Alert } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowBack } from '@mui/icons-material'
 import { useProjectForm } from '../hooks/useProjectForm'
 import ParticipantTable from './project/ParticipantTable'
 import ProjectFormFields from './project/ProjectFormFields'
 import FileUploadField from './project/FileUploadField'
 
-const ProjectCreate = () => {
+const ProjectEdit = () => {
+  const { id } = useParams()
   const navigate = useNavigate()
   const [showSuccess, setShowSuccess] = useState(false)
 
@@ -26,7 +27,7 @@ const ProjectCreate = () => {
     error,
     submitProject,
     setError
-  } = useProjectForm()
+  } = useProjectForm(true, id)
 
   const supervisor = localStorage.getItem('userName') || ''
 
@@ -41,8 +42,8 @@ const ProjectCreate = () => {
   }
 
   return (
-    <Box sx={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
-      <Paper sx={{ p: 3, width: 800, maxWidth: '95%' }} elevation={3}>
+    <Box sx={{ minHeight: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2, bgcolor: '#f5f5f5' }}>
+      <Paper sx={{ p: 4, width: 800, maxWidth: '100%' }} elevation={3}>
         <Button
           startIcon={<ArrowBack />}
           onClick={() => navigate(-1)}
@@ -51,14 +52,14 @@ const ProjectCreate = () => {
           Return
         </Button>
 
-        <Typography variant="h6" sx={{ mb: 3, color: 'primary.main' }}>
-          Project Creation
+        <Typography variant="h5" sx={{ mb: 3, fontWeight: 700, color: '#1a237e' }}>
+          Edit Project Details
         </Typography>
 
         {/* Student List */}
-        <Box sx={{ mb: 3 }}>
-          <Typography variant="subtitle1" sx={{ mb: 2, fontWeight: 600 }}>
-            Students
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+            Project Students
           </Typography>
           <ParticipantTable
             students={students}
@@ -79,7 +80,7 @@ const ProjectCreate = () => {
         <Typography variant="h6" sx={{ mt: 4, mb: 2 }}>
           Project Documents
         </Typography>
-        <Stack spacing={2}>
+        <Stack spacing={2} sx={{ mb: 4 }}>
           <FileUploadField
             index={0}
             file={files[0]}
@@ -101,18 +102,27 @@ const ProjectCreate = () => {
           <Button
             variant="contained"
             color="success"
+            size="large"
             onClick={handleSubmit}
             disabled={loading}
+            sx={{ 
+                px: 6, 
+                py: 1.5, 
+                fontSize: '1.1rem',
+                textTransform: 'none',
+                fontWeight: 600,
+                borderRadius: 2
+            }}
           >
-            {loading ? 'Saving...' : 'Submit'}
+            {loading ? 'Saving...' : 'Update Project'}
           </Button>
         </Box>
 
         {/* Error Display */}
         {error && (
-          <Typography color="error" sx={{ mt: 2, textAlign: 'center' }}>
+          <Alert severity="error" sx={{ mt: 3, borderRadius: 2 }}>
             {error}
-          </Typography>
+          </Alert>
         )}
       </Paper>
 
@@ -125,20 +135,18 @@ const ProjectCreate = () => {
       >
         <Alert
           severity="success"
+          variant="filled"
           sx={{
             width: '100%',
-            backgroundColor: '#58e45fff',
-            color: 'white',
-            '& .MuiAlert-icon': {
-              color: 'white'
-            }
+            fontWeight: 600,
+            borderRadius: 2
           }}
         >
-          Project created successfully!
+          Project updated successfully! Redirecting...
         </Alert>
       </Snackbar>
     </Box>
   )
 }
 
-export default ProjectCreate
+export default ProjectEdit

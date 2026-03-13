@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Card, CardContent, Typography } from '@mui/material'
-//statistic cards for dashboards 
+//statistic cards for student and staffdashboards 
 const StatisticsGrid = ({ stats }) => {
   return (
     <Grid container spacing={3} sx={{ mt: 2, justifyContent: 'center' }}>

@@ -4,7 +4,7 @@ import {
   Box, Paper, Typography, TextField, Button,
   Checkbox, FormControlLabel, CircularProgress, Alert
 } from '@mui/material';
-import logo from '../assets/Nile-University-of-Nigeria.jpg';
+import logo from '../../assets/Nile-University-of-Nigeria.jpg';
 import API_URL from '../../config';
 
 const StudentLogin = ({ onSetType }) => {
@@ -60,7 +60,7 @@ const StudentLogin = ({ onSetType }) => {
           <Typography variant="subtitle2" sx={{ mb: 0.5, fontWeight: 700, color: '#000', fontSize: '0.9rem' }}>School Email</Typography>
           <TextField
             fullWidth
-            placeholder="e.g. 21010xxxx@nileuniversity.edu.ng"
+            placeholder="e.g. 2022xxxx@nileuniversity.edu.ng"
             size="small"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -117,9 +117,6 @@ const StudentLogin = ({ onSetType }) => {
         <Box sx={{ mt: 2 }}>
           <Typography onClick={() => onSetType('staff')} sx={{ color: '#2b4593', cursor: 'pointer', fontWeight: 600, fontSize: '1rem', mb: 1 }}>
             Are you a staff? Click here
-          </Typography>
-          <Typography sx={{ color: '#2b4593', fontWeight: 600, fontSize: '1rem', mb: 1 }}>
-            Are you an admin? Click here
           </Typography>
           <Typography sx={{ color: '#718096', mt: 2, fontSize: '0.9rem' }}>
             Don't have an account? <Link to="/signup" style={{ color: '#2b4593', fontWeight: 700, textDecoration: 'none' }}>Sign up</Link>

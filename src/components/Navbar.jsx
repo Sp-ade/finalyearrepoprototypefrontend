@@ -55,6 +55,7 @@ const Navbar = () => {
       { title: 'Assign Leader', path: '/assignstudent' }
     ] : []),
     ...(role === 'admin' ? [
+      { title: 'Projects', path: '/admin/browse' },
       { title: 'Users', path: '/admin/users' },
       { title: 'Tags', path: '/admin/tags' }
     ] : []),

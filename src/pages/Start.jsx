@@ -31,7 +31,7 @@ const Start = () => {
   }, [])
   return (
     <Box sx={{ bgcolor: '#ffffff', minHeight: '80vh' }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="100vh">
         <Box
           sx={{
             backgroundImage: `url(${SplashImage})`,

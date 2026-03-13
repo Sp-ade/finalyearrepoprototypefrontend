@@ -18,6 +18,7 @@ const EditAccount = () => {
 
     // Password state
     const [passwords, setPasswords] = useState({
+        currentPassword: '',
         newPassword: '',
         confirmPassword: ''
     })
@@ -82,6 +83,7 @@ const EditAccount = () => {
                 },
                 body: JSON.stringify({
                     email: userData.email,
+                    currentPassword: passwords.currentPassword,
                     newPassword: passwords.newPassword
                 })
             })
@@ -93,7 +95,7 @@ const EditAccount = () => {
             }
 
             setSuccess('Password updated successfully!')
-            setPasswords({ newPassword: '', confirmPassword: '' })
+            setPasswords({ currentPassword: '', newPassword: '', confirmPassword: '' })
         } catch (err) {
             setError(err.message)
         } finally {
@@ -220,6 +222,18 @@ const EditAccount = () => {
                         </Typography>
                         <form onSubmit={handleSubmit}>
                             <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        fullWidth
+                                        label="Current Password"
+                                        name="currentPassword"
+                                        type="password"
+                                        value={passwords.currentPassword}
+                                        onChange={handlePasswordChange}
+                                        required
+                                        size="small"
+                                    />
+                                </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         fullWidth

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Container, Box, Paper, Typography, TextField, Button } from '@mui/material'
-import API_URL from '../config'
+import API_URL from '../../config'
 const AdminLogin = ({ onSwitch, onSetType }) => {
     const [userName, setUserName] = useState('')
     const [password, setPassword] = useState('')
@@ -51,18 +51,18 @@ const AdminLogin = ({ onSwitch, onSetType }) => {
     return (<>
         <Box sx={{ bgcolor: '#f5f5f5', minHeight: '70vh', display: 'flex', alignItems: 'center', py: 6 }}>
             <Container maxWidth="md">
-                <Paper elevation={3} sx={{ display: 'flex', borderRadius: "20px 0px 0px 20px", flexDirection: { xs: 'column', md: 'row' }, minHeight: 420 }}>
+                <Paper elevation={3} sx={{ display: 'flex', borderRadius: "20px", overflow: 'hidden', flexDirection: { xs: 'column', md: 'row' }, minHeight: 420 }}>
                     {/* Left: form */}
-                    <Box sx={{ width: '43%' }} component="form" onSubmit={handleSubmit}>
-                        <Box sx={{ mb: 2, background: 'linear-gradient(90deg, #ff6b35 0%, #ff8c42 60%)', color: '#fff', p: 2, borderRadius: "20px 1px 1px 1px", height: '40px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                    <Box sx={{ width: { xs: '100%', md: '43%' } }} component="form" onSubmit={handleSubmit}>
+                        <Box sx={{ mb: 2, background: '#2b4593', color: '#fff', p: 2, height: '60px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                             <Typography sx={{ color: '#ffffff', fontSize: '1.7rem' }}>Admin Login</Typography>
                         </Box>
-                        <Box sx={{ flex: 1, p: 4, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', Width: "80%" }}>
+                        <Box sx={{ flex: 1, p: 4, display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
                             <Typography>Email</Typography>
-                            <TextField label="Email" type="email" size='small' InputLabelProps={{ sx: { fontSize: 'small' } }} fullWidth sx={{ mb: 2, fontSize: 'small' }} value={userName} onChange={(e) => setUserName(e.target.value)} />
+                            <TextField label="" type="email" size='small' InputLabelProps={{ sx: { fontSize: 'small' } }} fullWidth sx={{ mb: 2, fontSize: 'small' }} value={userName} onChange={(e) => setUserName(e.target.value)} />
                             <Typography>Password</Typography>
-                            <TextField label="Password" type="password" size='small' InputLabelProps={{ sx: { fontSize: 'small' } }} fullWidth sx={{ mb: 3 }} value={password} onChange={(e) => setPassword(e.target.value)} />
-                            <Button type="submit" variant="contained" color="primary" fullWidth sx={{ background: 'linear-gradient(90deg, #ff6b35 0%, #ff8c42 100%)' }} disabled={loading}>{loading ? 'Signing in…' : 'Log In'}</Button>
+                            <TextField label="" type="password" size='small' InputLabelProps={{ sx: { fontSize: 'small' } }} fullWidth sx={{ mb: 3 }} value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Button type="submit" variant="contained" color="primary" fullWidth sx={{ background: 'linear-gradient(90deg, #2b4593 0%, #4a69bd 100%)' }} disabled={loading}>{loading ? 'Signing in…' : 'Log In'}</Button>
                             {error && <Typography sx={{ color: 'red', mt: 1 }}>{error}</Typography>}
                             <br />
                             <Typography sx={{ fontSize: "0.8rem", }}>NOTE: Admin access only</Typography>
@@ -77,9 +77,10 @@ const AdminLogin = ({ onSwitch, onSetType }) => {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        bgcolor: '#ff6b35',
+                        bgcolor: '#2b4593',
                         color: '#fff',
-                        p: 3
+                        p: 3,
+                        minHeight: { xs: 150, md: 'auto' }
                     }}>
                         <Typography variant="h4" align="center" sx={{ fontWeight: 700 }}>
                             🔐 System Administrator

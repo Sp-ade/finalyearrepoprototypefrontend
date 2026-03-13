@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import StudentLogin from '../components/StudentLogin'
-import StaffLogin from '../components/StaffLogin'
-import AdminLogin from '../components/AdminLogin'
+import StudentLogin from '../components/Authentication/StudentLogin'
+import StaffLogin from '../components/Authentication/StaffLogin'
+import AdminLogin from '../components/Authentication/AdminLogin'
 
 const LoginPage = () => {
     // Login types: 'student', 'staff', 'admin'

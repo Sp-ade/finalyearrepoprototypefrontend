@@ -12,10 +12,11 @@ const ProjectView = () => {
     const { id } = useParams()
     const navigate = useNavigate()
     const { project, loading } = useProjectView(id)
+    const [requestMode, setRequestMode] = React.useState('view')
     const { openDialog, reason, submitting, submitRequest, setOpenDialog, setReason, closeDialog } = useAccessRequest()
 
     const handleSubmitRequest = async () => {
-        const success = await submitRequest(project.id || project.project_id)
+        const success = await submitRequest(project.id || project.project_id, requestMode)
         if (success) {
             closeDialog()
         }
@@ -50,6 +51,13 @@ const ProjectView = () => {
     const documents = project.attachments || project.artifacts || []
     const canViewArtifacts = project.hasAccess || localStorage.getItem('role') !== 'student'
 
+    // Only show "Request Edit" if they are the uploader
+    const isStudent = localStorage.getItem('role') === 'student'
+
+    const handleOpenRequest = (mode) => {
+        setRequestMode(mode)
+        setOpenDialog(true)
+    }
     return (
         <Box sx={{ bgcolor: '#f5f5f5', minHeight: '100vh', py: { xs: 2, sm: 4 } }}>
             <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3 } }}>
@@ -95,31 +103,91 @@ const ProjectView = () => {
 
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mt: 4 }}>
                         {localStorage.getItem('role') !== 'student' && (
-                            <ProjectDelete
-                                projectId={project.id || project.project_id}
-                                projectTitle={project.title}
-                                onDeleteSuccess={() => navigate('/studentbrowse')}
-                            />
+                            <Box sx={{ display: 'flex', gap: 2 }}>
+                                <Button
+                                    variant="contained"
+                                    color="info"
+                                    onClick={() => navigate(`/staff/project/edit/${project.id || project.project_id}`)}
+                                    sx={{ minWidth: 120 }}
+                                >
+                                    Edit
+                                </Button>
+                                <ProjectDelete
+                                    projectId={project.id || project.project_id}
+                                    projectTitle={project.title}
+                                    onDeleteSuccess={() => navigate('/staffbrowse')}
+                                />
+                            </Box>
                         )}
 
-                        {!project.hasAccess && localStorage.getItem('role') === 'student' && (
-                            <Button
-                                variant="contained"
-                                size="large"
-                                onClick={() => setOpenDialog(true)}
-                                sx={{
-                                    width: { xs: '100%', sm: 'auto' },
-                                    px: { xs: 3, sm: 6 },
-                                    py: 1.5,
-                                    fontSize: '1.1rem',
-                                    fontWeight: 600,
-                                    borderRadius: 2,
-                                    textTransform: 'none',
-                                    boxShadow: 3,
-                                }}
-                            >
-                                Request Full View
-                            </Button>
+                        {isStudent && (
+                            <>
+                                {!project.hasAccess ? (
+                                    <Button
+                                        variant="contained"
+                                        size="large"
+                                        onClick={() => handleOpenRequest('view')}
+                                        sx={{
+                                            width: { xs: '100%', sm: 'auto' },
+                                            px: { xs: 3, sm: 6 },
+                                            py: 1.5,
+                                            fontSize: '1.1rem',
+                                            fontWeight: 600,
+                                            borderRadius: 2,
+                                            textTransform: 'none',
+                                            boxShadow: 3,
+                                        }}
+                                    >
+                                        Request Full View
+                                    </Button>
+                                ) : (
+                                    project.isSubmitter && (
+                                        project.editRequestApproved ? (
+                                            <Button
+                                                variant="contained"
+                                                size="large"
+                                                onClick={() => navigate('/studentprojectedit', { 
+                                                    state: { 
+                                                        editMode: true, 
+                                                        projectId: project.id || project.project_id,
+                                                        submissionId: project.submissionId
+                                                    } 
+                                                })}
+                                                color="success"
+                                                sx={{
+                                                    width: { xs: '100%', sm: 'auto' },
+                                                    px: { xs: 3, sm: 6 },
+                                                    py: 1.5,
+                                                    fontSize: '1.1rem',
+                                                    fontWeight: 600,
+                                                    borderRadius: 2,
+                                                    textTransform: 'none',
+                                                }}
+                                            >
+                                                Edit Project
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                variant="outlined"
+                                                size="large"
+                                                onClick={() => handleOpenRequest('edit')}
+                                                color="warning"
+                                                sx={{
+                                                    width: { xs: '100%', sm: 'auto' },
+                                                    px: { xs: 3, sm: 6 },
+                                                    py: 1.5,
+                                                    fontSize: '1.1rem',
+                                                    fontWeight: 600,
+                                                    borderRadius: 2,
+                                                    textTransform: 'none',
+                                                }}
+                                            >
+                                                Request Edit Access
+                                            </Button>
+                                        )
+                                    )
+                                )}
+                            </>
                         )}
                     </Box>
 
@@ -141,6 +209,7 @@ const ProjectView = () => {
                 setReason={setReason}
                 projectTitle={project.title}
                 loading={submitting}
+                mode={requestMode}
             />
         </Box>
     )

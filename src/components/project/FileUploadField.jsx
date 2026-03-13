@@ -4,6 +4,7 @@ import { Box, Typography, Button } from '@mui/material'
 const FileUploadField = ({
   index,
   file,
+  existingFile,
   onFileChange,
   onClear
 }) => {
@@ -32,17 +33,21 @@ const FileUploadField = ({
     }
   }
 
+  const hasFile = !!(file || existingFile)
+  const displayName = file ? file.name : (existingFile?.file_name || existingFile?.originalName || 'Existing Document')
+  const displaySize = file ? `${(file.size / 1024).toFixed(2)} KB` : (existingFile?.file_size ? `${(existingFile.file_size / 1024).toFixed(2)} KB` : '')
+
   return (
     <Box sx={{ position: 'relative' }}>
       <Box
         sx={{
           p: 3,
           border: '2px dashed',
-          borderColor: file ? 'success.main' : 'primary.main',
+          borderColor: hasFile ? 'success.main' : 'primary.main',
           borderRadius: 2,
           textAlign: 'center',
           cursor: 'pointer',
-          bgcolor: file ? 'success.light' : 'grey.50',
+          bgcolor: hasFile ? (file ? 'success.light' : '#e8f5e9') : 'grey.50',
           transition: 'all 0.3s ease',
           '&:hover': {
             bgcolor: 'primary.light',
@@ -61,16 +66,16 @@ const FileUploadField = ({
           onChange={handleInputChange}
         />
         <Typography variant="h6" fontWeight={600} gutterBottom>
-          {file ? `✓ Document ${index + 1} Selected` : `Document ${index + 1}: Drag & drop here`}
+          {hasFile ? `✓ Document ${index + 1} ${file ? 'Selected' : 'Uploaded'}` : `Document ${index + 1}: Drag & drop here`}
         </Typography>
         <Typography variant="body2" color="text.secondary" gutterBottom>
-          {file ? `${file.name} (${(file.size / 1024).toFixed(2)} KB)` : 'or click to browse'}
+          {hasFile ? `${displayName} ${displaySize ? `(${displaySize})` : ''}` : 'or click to browse'}
         </Typography>
         <Typography variant="caption" color="text.secondary">
           Accepted format: PDF
         </Typography>
       </Box>
-      {file && (
+      {hasFile && (
         <Button
           variant="outlined"
           color="error"
