@@ -102,26 +102,40 @@ const StudentBrowse = () => {
         right: '50%', marginLeft: '-50vw', marginRight: '-50vw', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat'
       }}>
         {/* search bar at the start of the page */}
-        <Box sx={{ mb: 3, width: { xs: '90%', sm: '80%' } }}>
-          <form onSubmit={handleSearchSubmit}>
+        <Box sx={{ mb: 3, width: { xs: '90%', md: '80%', lg: '800px' }, display: 'flex', flexDirection: 'row' }}>
+          <form onSubmit={handleSearchSubmit} style={{ flex: 1 }}>
             <TextField
               fullWidth
               label="Search projects"
               value={query}
+              placeholder='Search by Name or Project Title'
               onChange={e => setQuery(e.target.value)}
               sx={{
                 bgcolor: 'white',
-                width: "100%",
-                borderRadius: "40px",
+                borderRadius: "40px 0px 0px 40px",
                 '& .MuiOutlinedInput-root': {
-                  borderRadius: '40px',
+                  borderRadius: '40px 0px 0px 40px',
                   '& fieldset': {
-                    borderRadius: '40px',
+                    borderRadius: '40px 0px 0px 40px',
                   },
                 },
               }}
             />
           </form>
+          <Button
+            variant="contained"
+            onClick={handleSearchSubmit}
+            sx={{
+              px: 4,
+              borderRadius: '0px 40px 40px 0px',
+              bgcolor: '#49f663ff',
+              color: '#ffffff',
+              boxShadow: 'none',
+              '&:hover': { bgcolor: '#3ed656', boxShadow: 'none' }
+            }}
+          >
+            Search
+          </Button>
         </Box>
       </Box>
       <Box sx={{ p: { xs: 2, md: 4 } }}>

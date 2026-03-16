@@ -41,29 +41,45 @@ const StaffDashboard = () => {
       </Box>
 
       {/* Action Buttons */}
-      <Stack direction="row" spacing={2} sx={{ mt: 4, mb: 4 }} justifyContent="center" flexWrap="wrap">
-        <Button
-          variant="contained"
-          size="large"
-          sx={{ bgcolor: '#5fef6bff', color: 'white', '&:hover': { backgroundColor: '#77fa82ff' } }}
-          onClick={() => navigate('/staffbrowse')}
+      <Container maxWidth="md">
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={2}
+          sx={{ mt: 4, mb: 4 }}
+          justifyContent="center"
+          alignItems="stretch"
         >
-          Explore Projects
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          onClick={() => navigate('/projectcreate')}
-        >
-          Upload Projects
-        </Button>
-        <Button variant="outlined" size="large"
-          onClick={() => navigate('/studentsubmissionlist')}
-        >
-          View Student submissions
-        </Button>
-      </Stack>
+          <Button
+            variant="contained"
+            size="large"
+            sx={{
+              bgcolor: '#5fef6bff',
+              color: 'white',
+              flex: 1,
+              '&:hover': { backgroundColor: '#77fa82ff' }
+            }}
+            onClick={() => navigate('/staffbrowse')}
+          >
+            Explore Projects
+          </Button>
+          <Button
+            variant="contained"
+            size="large"
+            sx={{ flex: 1, bgcolor: '#2b4593', '&:hover': { backgroundColor: '#243a7aff', color: 'white' } }}
+            onClick={() => navigate('/projectcreate')}
+          >
+            Upload Projects
+          </Button>
+          <Button
+            variant="outlined"
+            size="large"
+            sx={{ flex: 1, '&:hover': { backgroundColor: '#2b4593', color: 'white' } }}
+            onClick={() => navigate('/studentsubmissionlist')}
+          >
+            View Student submissions
+          </Button>
+        </Stack>
+      </Container>
 
       {/* Recent Uploads */}
       <Box sx={{ width: '100%' }}>

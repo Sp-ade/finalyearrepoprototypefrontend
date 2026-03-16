@@ -110,26 +110,40 @@ const StaffBrowse = () => {
           <Typography variant="h3" sx={{ color: 'white', fontSize: { xs: '1rem', sm: '1.2rem' } }}>Welcome to the project browse page</Typography>
         </Box>
         {/* search bar at the start of the page */}
-        <Box sx={{ mb: 3, width: { xs: '90%', sm: '60%' } }}>
-          <form onSubmit={handleSearchSubmit}>
+        <Box sx={{ mb: 3, width: { xs: '90%', md: '80%', lg: '800px' }, display: 'flex', flexDirection: 'row' }}>
+          <form onSubmit={handleSearchSubmit} style={{ flex: 1 }}>
             <TextField
               fullWidth
               label="Search projects"
               value={query}
+              placeholder='Search by Name or Project Title'
               onChange={e => setQuery(e.target.value)}
               sx={{
                 bgcolor: 'white',
-                width: "100%",
-                borderRadius: "40px",
+                borderRadius: "40px 0px 0px 40px",
                 '& .MuiOutlinedInput-root': {
-                  borderRadius: '40px',
+                  borderRadius: '40px 0px 0px 40px',
                   '& fieldset': {
-                    borderRadius: '40px',
+                    borderRadius: '40px 0px 0px 40px',
                   },
                 },
               }}
             />
           </form>
+          <Button
+            variant="contained"
+            onClick={handleSearchSubmit}
+            sx={{
+              px: 4,
+              borderRadius: '0px 40px 40px 0px',
+              bgcolor: '#49f663ff',
+              boxShadow: 'none',
+              color: '#ffffff',
+              '&:hover': { bgcolor: '#3ed656', boxShadow: 'none' }
+            }}
+          >
+            Search
+          </Button>
         </Box>
 
       </Box>
@@ -238,9 +252,9 @@ const StaffBrowse = () => {
         </Box>
       </Box>
       {/* floating action button: create project */}
-      <Box sx={{ position: 'fixed', right: 24, bottom: 24, zIndex: 1400 }}>
-        <Fab color="primary" aria-label="add" onClick={() => navigate('/ProjectCreate')}>
-          <Typography>+</Typography>
+      <Box sx={{ position: 'fixed', right: 24, bottom: 24, zIndex: 1400, }}>
+        <Fab color="primary" aria-label="add" sx={{ height: 75, width: 75 }} onClick={() => navigate('/ProjectCreate')}>
+          <Typography sx={{ fontSize: 50 }}>+</Typography>
         </Fab>
       </Box>
     </Box>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box, Button, Stack } from '@mui/material'
+import { Box, Button, Stack, Container } from '@mui/material'
 import { useDashboardUser } from '../hooks/useDashboardUser'
 import { useStudentDashboard } from '../hooks/useStudentDashboard'
 import AccountInformation from './AccountInformation'
@@ -58,42 +58,51 @@ const StudentDashboard = () => {
       <StatisticsGrid stats={stats} />
 
       {/* Action Buttons */}
-      <Stack direction="row" spacing={2} sx={{ mt: 4, mb: 4 }} justifyContent="center" flexWrap="wrap">
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          sx={{ bgcolor: '#2b4593' }}
-          onClick={() => navigate('/studentbrowse')}
+      <Container maxWidth="md">
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={2}
+          sx={{ mt: 4, mb: 4 }}
+          justifyContent="center"
+          alignItems="stretch"
         >
-          Explore Projects
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          size="large"
-          sx={{
-            borderColor: '#2b4593', color: '#2b4593',
-            '&:hover': {
-              bgcolor: '#2b4593',
-              borderColor: '#2b4593',
-              color: 'white',
-            }
-          }}
-          onClick={() => navigate('/studentrequests')}
-        >
-          My Requests
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          size="large"
-          sx={{ bgcolor: '#49f663ff' }}
-          onClick={handleCheckStatus}
-        >
-          Check Submission Status
-        </Button>
-      </Stack>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            sx={{ bgcolor: '#2b4593', flex: 1 }}
+            onClick={() => navigate('/studentbrowse')}
+          >
+            Explore Projects
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            size="large"
+            sx={{
+              flex: 1,
+              borderColor: '#2b4593', color: '#2b4593',
+              '&:hover': {
+                bgcolor: '#2b4593',
+                borderColor: '#2b4593',
+                color: 'white',
+              }
+            }}
+            onClick={() => navigate('/studentrequests')}
+          >
+            My Requests
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            sx={{ bgcolor: '#49f663ff', flex: 1 }}
+            onClick={handleCheckStatus}
+          >
+            Check Submission Status
+          </Button>
+        </Stack>
+      </Container>
 
       {/* Approved Projects Section */}
       <ProjectsSection
