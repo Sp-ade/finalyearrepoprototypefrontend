@@ -10,6 +10,14 @@ const ProjectReviewDetails = ({ project }) => {
                 <Chip label={project.category} variant="outlined" />
                 <Chip label={project.year} variant="outlined" />
             </Stack>
+            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 2 }}>Tags</Typography>
+            {project.Tags && project.Tags.length > 0 && (
+                <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap' }}>
+                    {project.Tags.map((tag, index) => (
+                        <Chip key={index} label={tag} size="small" color="primary" variant="outlined" />
+                    ))}
+                </Stack>
+            )}
 
             <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mt: 2 }}>Description</Typography>
             <Typography paragraph sx={{ whiteSpace: 'pre-wrap' }}>{project.description}</Typography>

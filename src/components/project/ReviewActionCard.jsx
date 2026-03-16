@@ -9,7 +9,7 @@ const ReviewActionCard = ({
     loading, disabled
 }) => {
     return (
-        <Paper elevation={0} sx={{ p: 3, bgcolor: '#fafafa', border: '1px solid #ddd' }}>
+        <Paper elevation={0} sx={{ p: 3, bgcolor: '#fafafa', border: '1px solid #ddd', maxWidth: { xs: '100%', md: '60%' }, mx: "auto", mt: 4 }}>
             <Typography variant="h6" gutterBottom>Supervisor Action</Typography>
 
             <TextField

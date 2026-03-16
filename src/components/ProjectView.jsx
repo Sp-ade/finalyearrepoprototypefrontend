@@ -83,9 +83,6 @@ const ProjectView = () => {
                         >
                             {project.title}
                         </Typography>
-                        <Typography variant="h6" color="text.secondary" sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}>
-                            {project.name}
-                        </Typography>
                     </Box>
 
                     <Divider sx={{ mb: 4 }} />

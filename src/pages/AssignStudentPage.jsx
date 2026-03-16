@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip } from '@mui/material';
 import PageHeader from '../components/common/PageHeader';
 import { useAssignStudent } from '../hooks/useAssignStudent';
+import { useDashboardUser } from '../hooks/useDashboardUser';
 
 const AssignStudentPage = () => {
-    const { students, loading, error, setAsLeader } = useAssignStudent();
+    const { students, loading, error, setAsLeader, unassignLeader } = useAssignStudent();
+    const { userId: currentSupervisorId } = useDashboardUser();
     const [searchTerm, setSearchTerm] = useState('');
     const [actingStudent, setActingStudent] = useState(null);
 
@@ -19,7 +21,13 @@ const AssignStudentPage = () => {
 
     const handleSetLeader = async (userId) => {
         setActingStudent(userId);
-        await setAsLeader(userId);
+        await setAsLeader(userId, currentSupervisorId);
+        setActingStudent(null);
+    };
+
+    const handleUnassignLeader = async (userId) => {
+        setActingStudent(userId);
+        await unassignLeader(userId, currentSupervisorId);
         setActingStudent(null);
     };
 
@@ -83,14 +91,28 @@ const AssignStudentPage = () => {
                                         />
                                     </TableCell>
                                     <TableCell align="right">
-                                        <Button
-                                            variant={student.role === 'leader' ? "outlined" : "contained"}
-                                            size="small"
-                                            disabled={student.role === 'leader' || actingStudent === student.id}
-                                            onClick={() => handleSetLeader(student.id)}
-                                        >
-                                            {actingStudent === student.id ? 'Updating...' : student.role === 'leader' ? 'Already Leader' : 'Set as Leader'}
-                                        </Button>
+                                        <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
+                                            {student.role === 'leader' ? (
+                                                <Button
+                                                    variant="outlined"
+                                                    size="small"
+                                                    color="error"
+                                                    disabled={student.leader_assigned_by !== currentSupervisorId || actingStudent === student.id}
+                                                    onClick={() => handleUnassignLeader(student.id)}
+                                                >
+                                                    {actingStudent === student.id ? 'Updating...' : 'Unassign Leader'}
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    variant="contained"
+                                                    size="small"
+                                                    disabled={actingStudent === student.id}
+                                                    onClick={() => handleSetLeader(student.id)}
+                                                >
+                                                    {actingStudent === student.id ? 'Updating...' : 'Set as Leader'}
+                                                </Button>
+                                            )}
+                                        </Box>
                                     </TableCell>
                                 </TableRow>
                             ))

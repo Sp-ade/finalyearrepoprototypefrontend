@@ -64,11 +64,17 @@ const StaffProjectValidation = () => {
   }
 
   return (
-    <Box sx={{ p: 4, bgcolor: '#f5f5f5', minHeight: '90vh' }}>
-      <Paper sx={{ p: 4, maxWidth: 1000, mx: 'auto' }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="flex-start" sx={{ mb: 3 }}>
+    <Box sx={{ p: { xs: 1, sm: 4 }, bgcolor: '#f5f5f5', minHeight: '90vh' }}>
+      <Paper sx={{ p: { xs: 2, sm: 4 }, maxWidth: 1000, mx: 'auto' }}>
+        <Stack 
+          direction={{ xs: 'column-reverse', sm: 'row' }} 
+          justifyContent="space-between" 
+          alignItems={{ xs: 'flex-start', sm: 'flex-start' }} 
+          spacing={2}
+          sx={{ mb: 3 }}
+        >
           <PageHeader title="Project Validation" showBack={true} />
-          <StatusChip status={submission.status} sx={{ mt: 1 }} />
+          <StatusChip status={submission.status} />
         </Stack>
 
         <Grid container spacing={4}>
@@ -83,19 +89,18 @@ const StaffProjectValidation = () => {
               submissionDate={submission.requested_at}
               studentsInvolved={project.Studentnames}
             />
-
-            <ReviewActionCard
-              grade={grade}
-              setGrade={setGrade}
-              remark={supervisorResponse}
-              setRemark={setSupervisorResponse}
-              onApprove={handleApproveClick}
-              onRequestChanges={() => setChangesDialogOpen(true)}
-              loading={actionLoading}
-              disabled={isApproved}
-            />
           </Grid>
         </Grid>
+        <ReviewActionCard
+          grade={grade}
+          setGrade={setGrade}
+          remark={supervisorResponse}
+          setRemark={setSupervisorResponse}
+          onApprove={handleApproveClick}
+          onRequestChanges={() => setChangesDialogOpen(true)}
+          loading={actionLoading}
+          disabled={isApproved}
+        />
       </Paper>
 
       {/* Request Changes Dialog */}

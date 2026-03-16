@@ -49,9 +49,6 @@ const StaffProjectView = () => {
                         <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 700, color: 'primary.main', mb: 2 }}>
                             {project.title}
                         </Typography>
-                        <Typography variant="h6" color="text.secondary" gutterBottom>
-                            {project.name}
-                        </Typography>
                     </Box>
 
                     <Divider sx={{ mb: 4 }} />

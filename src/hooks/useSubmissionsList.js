@@ -16,18 +16,21 @@ const getStatusColor = (status) => {
   }
 }
 
-export const useSubmissionsList = () => {
+export const useSubmissionsList = (supervisorId = null) => {
   const [submissions, setSubmissions] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('All')
 
   useEffect(() => {
     fetchSubmissions()
-  }, [])
+  }, [supervisorId])
 
   const fetchSubmissions = async () => {
     try {
-      const response = await fetch(`${API_URL}/api/submissions`)
+      const url = supervisorId 
+        ? `${API_URL}/api/submissions?supervisorId=${supervisorId}`
+        : `${API_URL}/api/submissions`
+      const response = await fetch(url)
       if (response.ok) {
         const data = await response.json()
         setSubmissions(data)

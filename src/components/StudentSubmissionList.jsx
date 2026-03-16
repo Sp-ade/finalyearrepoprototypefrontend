@@ -10,9 +10,11 @@ import { useNavigate } from 'react-router-dom'
 import { useSubmissionsList } from '../hooks/useSubmissionsList'
 import StatusFilter from './common/StatusFilter'
 import SubmissionsTable from './common/SubmissionsTable'
+import { useDashboardUser } from '../hooks/useDashboardUser'
 
 const StudentSubmissionList = () => {
   const navigate = useNavigate()
+  const { userId } = useDashboardUser()
   const {
     submissions,
     loading,
@@ -20,7 +22,7 @@ const StudentSubmissionList = () => {
     setFilter,
     statusOptions,
     getStatusColor
-  } = useSubmissionsList()
+  } = useSubmissionsList(userId)
 
   const handleReview = (submissionId) => {
     navigate(`/staffprojectvalidation/${submissionId}`)

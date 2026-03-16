@@ -83,7 +83,7 @@ const ProjectDetails = ({ project }) => {
             </Grid>
 
             {/* Final Remark */}
-            {project.supervisor_remark && (
+            {(project.finalRemark || project.supervisor_remark) && (
                 <Grid item xs={12}>
                     <Box sx={{
                         bgcolor: '#f9f9f9',
@@ -96,7 +96,7 @@ const ProjectDetails = ({ project }) => {
                             Supervisor Remark
                         </Typography>
                         <Typography variant="body1" sx={{ mt: 1, fontStyle: 'italic', fontSize: { xs: '0.9rem', sm: '1rem' } }}>
-                            "{project.supervisor_remark}"
+                            "{project.finalRemark || project.supervisor_remark}"
                         </Typography>
                     </Box>
                 </Grid>
