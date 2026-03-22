@@ -65,7 +65,7 @@ const StaffDashboard = () => {
           <Button
             variant="contained"
             size="large"
-            sx={{ flex: 1, bgcolor: '#2b4593', '&:hover': { backgroundColor: '#243a7aff', color: 'white' } }}
+            sx={{ bgcolor: '#2b4593', '&:hover': { backgroundColor: '#243a7aff', color: 'white' } }}
             onClick={() => navigate('/projectcreate')}
           >
             Upload Projects

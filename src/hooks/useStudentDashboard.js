@@ -97,9 +97,9 @@ export const useStudentDashboard = (userId) => {
   const pendingCount = requests.filter(r => r.status?.toLowerCase() === 'pending').length
 
   const stats = [
-    { label: 'Approved Projects', value: approvedCount, color: 'success.main' },
-    { label: 'Pending Requests', value: pendingCount, color: 'warning.main' },
-    { label: 'Total Requests', value: requests.length },
+    { label: 'Approved Projects', value: approvedCount, bgColor: '#2b4593' },
+    { label: 'Pending Requests', value: pendingCount },
+    { label: 'Total Requests', value: requests.length, bgColor: '#2b4593' },
   ]
 
   return {

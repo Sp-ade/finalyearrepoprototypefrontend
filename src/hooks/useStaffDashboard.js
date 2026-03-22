@@ -54,9 +54,9 @@ export const useStaffDashboard = (userId) => {
   }, [userId])
 
   const stats = [
-    { label: 'Projects uploaded', value: projectsUploadedCount },
+    { label: 'Projects uploaded', value: projectsUploadedCount, bgColor: '#2b4593' },
     { label: 'Pending students request', value: pendingRequestsCount },
-    { label: 'Request history', value: requestHistoryCount },
+    { label: 'Request history', value: requestHistoryCount, bgColor: '#2b4593' },
   ]
 
   return {

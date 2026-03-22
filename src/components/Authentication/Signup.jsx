@@ -191,14 +191,21 @@ const Signup = () => {
                             <TextField
                                 fullWidth
                                 label="Department"
+                                select
                                 name="department"
                                 value={formData.department}
                                 onChange={handleChange}
                                 sx={{ mb: 2 }}
                                 size="small"
                                 required
-                                helperText="Your department (e.g., Computer Science, Engineering)"
-                            />
+                                helperText="Select your department"
+                            >
+                                <MenuItem value="Software Engineering">Software Engineering</MenuItem>
+                                <MenuItem value="Information Technology">Information Technology</MenuItem>
+                                <MenuItem value="Computer Science">Computer Science</MenuItem>
+                                <MenuItem value="Data Science">Data Science</MenuItem>
+                                <MenuItem value="Cyber Security">Cyber Security</MenuItem>
+                            </TextField>
                         )}
 
                         <TextField

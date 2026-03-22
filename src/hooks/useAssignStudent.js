@@ -27,7 +27,7 @@ export const useAssignStudent = () => {
         fetchStudents();
     }, []);
 
-    const setAsLeader = async (userId, supervisorId) => {
+    const setAsLeader = async (userId, supervisorId, supervisorFirstName = '', supervisorLastName = '') => {
         try {
             const response = await fetch(`${API_URL}/api/supervisors/students/${userId}/role`, {
                 method: 'PUT',
@@ -44,7 +44,13 @@ export const useAssignStudent = () => {
             // Update local state without fetching all again
             setStudents(prev => prev.map(student =>
                 student.id === userId
-                    ? { ...student, role: 'leader', leader_assigned_by: supervisorId }
+                    ? { 
+                        ...student, 
+                        role: 'leader', 
+                        leader_assigned_by: supervisorId,
+                        supervisor_first_name: supervisorFirstName,
+                        supervisor_last_name: supervisorLastName
+                      }
                     : student
             ));
 
@@ -73,7 +79,13 @@ export const useAssignStudent = () => {
             // Update local state
             setStudents(prev => prev.map(student =>
                 student.id === userId
-                    ? { ...student, role: 'member', leader_assigned_by: null }
+                    ? { 
+                        ...student, 
+                        role: 'member', 
+                        leader_assigned_by: null,
+                        supervisor_first_name: null,
+                        supervisor_last_name: null
+                      }
                     : student
             ));
 

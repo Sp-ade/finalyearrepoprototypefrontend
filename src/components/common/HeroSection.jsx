@@ -6,10 +6,11 @@ const HeroSection = ({ backgroundImage, firstName, lastName }) => {
     <Box
       sx={{
         width: '100%',
-        height: '35vh',
+        height: '45vh',
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: { xs: 'right', sm: 'top' },
         color: 'common.white',
         display: 'flex',
         alignItems: 'center',
@@ -19,7 +20,7 @@ const HeroSection = ({ backgroundImage, firstName, lastName }) => {
       <Typography
         variant="h4"
         component="h1"
-        sx={{ textShadow: '2px 2px 4px rgba(0,0,0,0.6)' }}
+        sx={{ textShadow: '2px 2px 4px rgba(0,0,0,0.6)', fontSize: { xs: '20px', sm: '30px', md: '40px' } }}
       >
         Hello {firstName} {lastName}
       </Typography>

@@ -2,7 +2,7 @@ import React from 'react'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import { CssBaseline } from '@mui/material'
 import MainLayout from './Layouts/MainLayout'
-import Start from './pages/Start'
+import SplashScreen from './pages/SplashScreen'
 import StaffBrowse from './components/StaffBrowse'
 import StaffDashboard from './components/StaffDashboard'
 import StudentBrowse from './components/StudentBrowse'
@@ -33,7 +33,7 @@ import AdminBrowse from './pages/AdminBrowse'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<MainLayout />}>
-      <Route path='/' element={<Start />} />
+      <Route path='/' element={<SplashScreen />} />
       <Route path='login' element={<LoginPage />} />
       <Route path='adminlogin' element={<AdminLogin />} />
       <Route path='signup' element={<Signup />} />

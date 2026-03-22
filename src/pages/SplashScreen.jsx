@@ -4,7 +4,7 @@ import SplashImage from '../assets/Nile-University-of-Nigeria.jpg'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const Start = () => {
+const SplashScreen = () => {
   const navigate = useNavigate()
   useEffect(() => {
 
@@ -24,31 +24,32 @@ const Start = () => {
           navigate('/admindashboard')
         }
 
-      }, 1200);
+      }, 800);
     }
 
     fetchUserData()
   }, [])
   return (
-    <Box sx={{ bgcolor: '#ffffff', minHeight: '80vh' }}>
-      <Container maxWidth="100vh">
+    <Box sx={{ bgcolor: '#ffffff', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Container maxWidth="sm">
         <Box
           sx={{
             backgroundImage: `url(${SplashImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            height: '100vh',
-            borderRadius: '8px',
+            width: '100%',
+            height: '400px',
+            borderRadius: '12px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             color: 'white',
             textShadow: '2px 2px 4px rgba(0,0,0,0.6)',
           }}
-        ></Box></Container>
-
+        ></Box>
+      </Container>
     </Box>
   )
 }
 
-export default Start
+export default SplashScreen

@@ -6,7 +6,7 @@ import { useDashboardUser } from '../hooks/useDashboardUser';
 
 const AssignStudentPage = () => {
     const { students, loading, error, setAsLeader, unassignLeader } = useAssignStudent();
-    const { userId: currentSupervisorId } = useDashboardUser();
+    const { userId: currentSupervisorId, firstName, lastName } = useDashboardUser();
     const [searchTerm, setSearchTerm] = useState('');
     const [actingStudent, setActingStudent] = useState(null);
 
@@ -21,7 +21,7 @@ const AssignStudentPage = () => {
 
     const handleSetLeader = async (userId) => {
         setActingStudent(userId);
-        await setAsLeader(userId, currentSupervisorId);
+        await setAsLeader(userId, currentSupervisorId, firstName, lastName);
         setActingStudent(null);
     };
 
@@ -60,19 +60,20 @@ const AssignStudentPage = () => {
                             <TableCell sx={{ fontWeight: 600 }}>Matric No</TableCell>
                             <TableCell sx={{ fontWeight: 600 }}>Department</TableCell>
                             <TableCell sx={{ fontWeight: 600 }}>Current Role</TableCell>
+                            <TableCell sx={{ fontWeight: 600 }}>Supervisor</TableCell>
                             <TableCell sx={{ fontWeight: 600 }} align="right">Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {loading ? (
                             <TableRow>
-                                <TableCell colSpan={5} align="center" sx={{ py: 3 }}>
+                                <TableCell colSpan={6} align="center" sx={{ py: 3 }}>
                                     Loading students...
                                 </TableCell>
                             </TableRow>
                         ) : filteredStudents.length === 0 ? (
                             <TableRow>
-                                <TableCell colSpan={5} align="center" sx={{ py: 3 }}>
+                                <TableCell colSpan={6} align="center" sx={{ py: 3 }}>
                                     No students found matching your search.
                                 </TableCell>
                             </TableRow>
@@ -89,6 +90,9 @@ const AssignStudentPage = () => {
                                             size="small"
                                             sx={{ fontWeight: 600 }}
                                         />
+                                    </TableCell>
+                                    <TableCell>
+                                        {student.supervisor_first_name ? `${student.supervisor_first_name} ${student.supervisor_last_name}` : <Typography variant="caption" color="text.disabled">Not Assigned</Typography>}
                                     </TableCell>
                                     <TableCell align="right">
                                         <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
